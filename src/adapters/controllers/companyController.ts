@@ -1,6 +1,6 @@
 import { Request, Response } from 'express'
 
-import ICompanyUseCase from '@useCases/company/ICompanyUseCase'
+import { ICompanyUseCase } from '@useCases/company/ICompanyUseCase'
 
 export class CompanyController {
   repository: ICompanyUseCase

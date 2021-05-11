@@ -1,4 +1,4 @@
-import ICompany from '@entities/ICompany'
+import { ICompany } from '@entities/ICompany'
 
 import { EntitySchema } from 'typeorm'
 

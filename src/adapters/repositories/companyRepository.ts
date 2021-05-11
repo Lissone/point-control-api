@@ -1,9 +1,9 @@
 import { getRepository, Repository } from 'typeorm'
 
+import { ICompany } from '@entities/ICompany'
 import { CompanyEntity } from '@external/database/entities/CompanyEntity'
-import ICompany from '@entities/ICompany'
 
-import ICompanyRepository from '@useCases/company/ICompanyRepository'
+import { ICompanyRepository } from '@useCases/company/ICompanyRepository'
 
 export class CompanyRepository implements ICompanyRepository {
 

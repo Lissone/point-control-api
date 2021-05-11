@@ -1,7 +1,7 @@
-import ICompany from "@entities/ICompany"
+import { ICompany } from "@entities/ICompany"
 
-import ICompanyUseCase from "./ICompanyUseCase"
-import ICompanyRepository from "./ICompanyRepository"
+import { ICompanyUseCase } from "./ICompanyUseCase"
+import { ICompanyRepository } from "./ICompanyRepository"
 
 export class CompanyUseCase implements ICompanyUseCase {
   repository: ICompanyRepository
