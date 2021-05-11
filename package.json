@@ -1,0 +1,40 @@
+{
+  "name": "pointControl-api",
+  "version": "1.0.0",
+  "description": "Api de uma aplicação de controle de pontos de empresas.",
+  "main": "server.ts",
+  "repository": "https://github.com/Lissone/pointControl-api.git",
+  "author": "Leonardo Dias Lissone",
+  "license": "MIT",
+  "scripts": {
+    "dev": "nodemon -r tsconfig-paths/register src/external/server.ts"
+  },
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "dotenv": "^9.0.2",
+    "express": "^4.17.1",
+    "mssql": "^6.2.1",
+    "reflect-metadata": "^0.1.13",
+    "typeorm": "^0.2.32"
+  },
+  "devDependencies": {
+    "@types/body-parser": "^1.19.0",
+    "@types/cors": "^2.8.10",
+    "@types/express": "^4.17.11",
+    "@types/node": "^15.0.2",
+    "@typescript-eslint/eslint-plugin": "^4.23.0",
+    "@typescript-eslint/parser": "^4.23.0",
+    "eslint": "^7.26.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-import-resolver-typescript": "^2.4.0",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-prettier": "^3.4.0",
+    "nodemon": "^2.0.7",
+    "prettier": "^2.3.0",
+    "ts-node": "^9.1.1",
+    "tsconfig-paths": "^3.9.0",
+    "typescript": "^4.2.4"
+  }
+}

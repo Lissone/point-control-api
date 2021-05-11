@@ -1,0 +1,31 @@
+{
+  "compilerOptions": {
+    "target": "esnext",
+    "module": "commonjs",
+    "lib": ["ES6"],
+    "allowJs": true,
+    "outDir": "./dist",
+    "rootDir": "./src",
+    "removeComments": true,
+    "strict": true, // Dependendo do projeto sera necessario desabilitar
+    "typeRoots": [
+      "./src/@types",
+      "../../node_modules/@types",
+      "./node_modules/@types"
+    ],
+    "esModuleInterop": true,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "baseUrl": "./",
+    "paths": {
+      "@external/*": ["src/external/*"],
+      "@entities/*": ["src/entities/*"],
+      "@controllers/*": ["src/adapters/controllers/*"],
+      "@repositories/*": ["src/adapters/repositories/*"],
+      "@useCases/*": ["./src/useCases/*"],
+      "@shared/*": ["src/shared/*"],
+    }
+  }
+}
