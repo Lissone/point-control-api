@@ -12,13 +12,13 @@ export class CompanyRepository implements ICompanyRepository {
   }
 
   async getAll () : Promise<ICompany[]> {
-    const ret = await this.repository.find()
+    const ret = await this.repository.find({ relations: ['employees']})
 
     return ret
   }
 
   async getOne (cnpj: string) : Promise<ICompany | undefined> {
-    const ret = await this.repository.findOne(cnpj)
+    const ret = await this.repository.findOne(cnpj, { relations: ['employees']})
 
     return ret
   }
