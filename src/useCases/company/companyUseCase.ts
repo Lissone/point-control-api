@@ -31,7 +31,7 @@ export class CompanyUseCase implements ICompanyUseCase {
     }
   }
 
-  async post (company: ICompany) : Promise<ICompany> {
+  async create (company: ICompany) : Promise<ICompany> {
     try {
       const { cnpj } = company
 
@@ -40,7 +40,7 @@ export class CompanyUseCase implements ICompanyUseCase {
       if (exists != null) 
         throw new Error('Company already exists')
 
-      const ret = await this.repository.post(company)
+      const ret = await this.repository.create(company)
 
       return ret
     } catch (err) {

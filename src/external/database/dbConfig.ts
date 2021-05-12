@@ -1,6 +1,7 @@
 import { createConnection } from 'typeorm'
 
 import { CompanyEntity } from './entities/CompanyEntity'
+import { EmployeeEntity } from './entities/EmployeeEntity'
 
 const connection = createConnection({
   type: 'mssql',
@@ -9,7 +10,7 @@ const connection = createConnection({
   username: process.env.DB_USERNAME,
   password: process.env.DB_PASSWORD,
   database: process.env.DB_NAME,
-  entities: [CompanyEntity],
+  entities: [CompanyEntity, EmployeeEntity],
   synchronize: true,
   logging: false,
   options: {

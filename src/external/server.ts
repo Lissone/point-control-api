@@ -11,9 +11,7 @@ connection
   .then(() => {
     console.log('Database connected')
   })
-  .catch(() => { 
-    console.log('Error connecting to database')
-   })
+  .catch(console.log)
 
 app.listen(port, () => {
   console.log(`Listening on port: ${port}`)

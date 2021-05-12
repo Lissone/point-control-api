@@ -23,7 +23,7 @@ export class CompanyRepository implements ICompanyRepository {
     return ret
   }
 
-  async post (data: ICompany) : Promise<ICompany> {
+  async create (data: ICompany) : Promise<ICompany> {
     const obj = await this.repository.create(data)
 
     const ret = await this.repository.save(obj)

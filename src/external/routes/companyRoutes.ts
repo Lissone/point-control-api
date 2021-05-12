@@ -12,6 +12,6 @@ const companyController = new CompanyController(companyUseCase)
 
 companyRoutes.get('/', (req, res) => companyController.getAll(req, res))
 companyRoutes.get('/:cnpj', (req, res) => companyController.getOne(req, res))
-companyRoutes.post('/', (req, res) => companyController.post(req, res))
+companyRoutes.post('/', (req, res) => companyController.create(req, res))
 
 export { companyRoutes }
