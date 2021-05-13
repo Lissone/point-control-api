@@ -1,19 +1,19 @@
 import { Request, Response } from 'express'
 
-import { ICompanyUseCase } from '@useCases/company/ICompanyUseCase'
+import { IAddressUseCase } from '@useCases/address/IAddressUseCase'
 
-export class CompanyController {
-  useCase: ICompanyUseCase
+export class AddressController {
+  useCase: IAddressUseCase
 
-  constructor (useCase: ICompanyUseCase) {
+  constructor (useCase: IAddressUseCase) {
     this.useCase = useCase
   }
 
   async getAll (req: Request, res: Response) : Promise<void> {
     try {
-      const companies = await this.useCase.getAll()
+      const adresses = await this.useCase.getAll()
 
-      res.status(200).json(companies)
+      res.status(200).json(adresses)
     } catch (err) {
       res.status(500).json({ message: err.message })
     }
@@ -21,14 +21,14 @@ export class CompanyController {
 
   async getOne (req: Request, res: Response) : Promise<void> {
     try {
-      const { cnpj } = req.params
+      const { id } = req.params
 
-      const company = await this.useCase.getOne(cnpj)
+      const address = await this.useCase.getOne(Number(id))
 
-      if (company == null) 
+      if (address == null) 
         res.sendStatus(404)
 
-      res.status(200).json(company)
+      res.status(200).json(address)
     } catch (err) {
       res.status(500).json({ message: err.message })
     }
