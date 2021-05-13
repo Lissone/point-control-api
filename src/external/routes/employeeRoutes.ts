@@ -13,5 +13,6 @@ const employeeController = new EmployeeController(employeeUseCase)
 employeeRoutes.get('/', (req, res) => employeeController.getAll(req, res))
 employeeRoutes.get('/:cpf', (req, res) => employeeController.getOne(req, res))
 employeeRoutes.post('/', (req, res) => employeeController.create(req, res))
+employeeRoutes.put('/:cpf', (req, res) => employeeController.update(req, res))
 
 export { employeeRoutes }

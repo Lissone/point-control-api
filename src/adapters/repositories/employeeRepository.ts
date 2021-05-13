@@ -12,13 +12,13 @@ export class EmployeeRepository implements IEmployeeRepository {
   }
 
   async getAll () : Promise<IEmployee[]> {
-    const ret = await this.repository.find({ relations: ['company'] })
+    const ret = await this.repository.find({ relations: ['company', 'address'] })
 
     return ret
   }
 
   async getOne (cpf: string) : Promise<IEmployee | undefined> {
-    const ret = await this.repository.findOne(cpf, { relations: ['company'] })
+    const ret = await this.repository.findOne(cpf, { relations: ['company', 'address'] })
 
     return ret
   }
@@ -27,6 +27,12 @@ export class EmployeeRepository implements IEmployeeRepository {
     const obj = await this.repository.create(employee)
 
     const ret = await this.repository.save(obj)
+
+    return ret
+  }
+
+  async update (employee: IEmployee) : Promise<IEmployee> {
+    const ret = await this.repository.save(employee)
 
     return ret
   }

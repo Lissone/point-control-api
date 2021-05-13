@@ -47,4 +47,14 @@ export class EmployeeUseCase implements IEmployeeUseCase {
       throw new Error(err)
     }
   }
+
+  async update (employee: IEmployee) : Promise<IEmployee> {
+    try {
+      const ret = await this.repository.update(employee)
+
+      return ret
+    } catch (err) {
+      throw new Error(err)
+    }
+  }
 }

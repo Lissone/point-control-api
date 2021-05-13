@@ -28,7 +28,8 @@ export const CompanyEntity = new EntitySchema<ICompany>({
     employees: {
       type: 'one-to-many',
       target: 'employee',
-      inverseSide: "company"
+      inverseSide: 'company',
+      nullable: true
     }
   }
 })
