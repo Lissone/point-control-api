@@ -36,9 +36,9 @@ export class CompanyController {
 
   async create (req: Request, res: Response) : Promise<void> {
     try {
-      const ret = await this.useCase.create(req.body)
+      const company = await this.useCase.create(req.body)
 
-      res.status(201).send(ret)
+      res.status(201).send(company)
     } catch (err) {
       res.status(500).json({ message: err.message })
     }

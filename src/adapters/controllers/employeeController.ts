@@ -36,9 +36,9 @@ export class EmployeeController {
 
   async create (req: Request, res: Response) : Promise<void> {
     try {
-      const ret = await this.useCase.create(req.body)
+      const employee = await this.useCase.create(req.body)
 
-      res.status(201).send(ret)
+      res.status(201).send(employee)
     } catch (err) {
       res.status(500).json({ message: err.message })
     }
