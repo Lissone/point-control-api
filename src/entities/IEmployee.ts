@@ -1,3 +1,4 @@
+import { IAbsence } from './IAbsence';
 import { IAddress } from "./IAddress";
 import { ICompany } from "./ICompany";
 
@@ -18,4 +19,5 @@ export interface IEmployee {
   updatedAt: Date
   company?: ICompany
   address?: IAddress
+  absences?: IAbsence[]
 }

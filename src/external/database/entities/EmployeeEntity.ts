@@ -86,6 +86,12 @@ export const EmployeeEntity = new EntitySchema<IEmployee>({
       }),
       target: 'address',
       nullable: true
+    },
+    absences: {
+      type: 'one-to-many',
+      target: 'absence',
+      inverseSide: 'employee',
+      nullable: true
     }
   }
 })

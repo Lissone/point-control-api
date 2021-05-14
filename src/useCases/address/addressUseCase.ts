@@ -3,8 +3,6 @@ import { IAddress } from '@entities/IAddress'
 import { IAddressUseCase } from './IAddressUseCase'
 import { IAddressRepository } from './IAddressRepository'
 
-
-
 export class AddressUseCase implements IAddressUseCase {
   repository: IAddressRepository
 
@@ -19,7 +17,6 @@ export class AddressUseCase implements IAddressUseCase {
       return adresses
     } catch (err) {
       throw new Error(err)
-      
     }
   }
 
