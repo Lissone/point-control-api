@@ -25,10 +25,12 @@ export class EmployeeController {
 
       const employee = await this.useCase.getOne(cpf)
 
-      if (employee == null) 
+      if (employee == null) {
         res.sendStatus(404)
+        return
+      }
 
-        res.status(200).json(employee)
+      res.status(200).json(employee)
     } catch (err) {
       res.status(500).json({ message: err.message })
     }
@@ -48,13 +50,17 @@ export class EmployeeController {
     try {
       const { cpf } = req.params
 
-      if(cpf !== req.body.cpf)
+      if(cpf != req.body.cpf) {
         res.sendStatus(400)
+        return
+      }
 
       const employee = await this.useCase.getOne(cpf)
 
-      if (employee == null) 
+      if (employee == null) {
         res.sendStatus(404)
+        return
+      }
 
       const ret = await this.useCase.update(req.body)
 

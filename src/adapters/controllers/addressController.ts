@@ -25,8 +25,10 @@ export class AddressController {
 
       const address = await this.useCase.getOne(Number(id))
 
-      if (address == null) 
+      if (address == null) {
         res.sendStatus(404)
+        return
+      }
 
       res.status(200).json(address)
     } catch (err) {

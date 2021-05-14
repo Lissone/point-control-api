@@ -25,8 +25,10 @@ export class CompanyController {
 
       const company = await this.useCase.getOne(cnpj)
 
-      if (company == null) 
+      if (company == null) {
         res.sendStatus(404)
+        return
+      }
 
       res.status(200).json(company)
     } catch (err) {
