@@ -32,13 +32,6 @@ export class AddressUseCase implements IAddressUseCase {
 
   async create (address: IAddress) : Promise<IAddress> {
     try {
-      const { id } = address
-
-      const exists = await this.repository.getOne(id)
-
-      if (exists != null) 
-        throw new Error('Address already exists')
-
       const ret = await this.repository.create(address)
 
       return ret
