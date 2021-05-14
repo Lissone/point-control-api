@@ -1,6 +1,7 @@
-import { IAbsence } from './IAbsence';
-import { IAddress } from "./IAddress";
-import { ICompany } from "./ICompany";
+import { IAbsence } from './IAbsence'
+import { IAddress } from './IAddress'
+import { ICompany } from './ICompany'
+import { IPoint } from './IPoint'
 
 export interface IEmployee {
   cpf: string
@@ -20,4 +21,5 @@ export interface IEmployee {
   company?: ICompany
   address?: IAddress
   absences?: IAbsence[]
+  points?: IPoint[]
 }

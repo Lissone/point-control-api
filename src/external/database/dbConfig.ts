@@ -4,6 +4,7 @@ import { CompanyEntity } from './entities/CompanyEntity'
 import { EmployeeEntity } from './entities/EmployeeEntity'
 import { AddressEntity } from './entities/AddressEntity'
 import { AbsenceEntity } from './entities/AbsenceEntity'
+import { PointEntity } from './entities/PointEntity'
 
 const connection = createConnection({
   type: 'mssql',
@@ -12,7 +13,7 @@ const connection = createConnection({
   username: process.env.DB_USERNAME,
   password: process.env.DB_PASSWORD,
   database: process.env.DB_NAME,
-  entities: [CompanyEntity, EmployeeEntity, AddressEntity, AbsenceEntity],
+  entities: [CompanyEntity, EmployeeEntity, AddressEntity, AbsenceEntity, PointEntity],
   synchronize: true,
   logging: false,
   options: {

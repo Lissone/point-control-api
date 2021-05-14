@@ -92,6 +92,12 @@ export const EmployeeEntity = new EntitySchema<IEmployee>({
       target: 'absence',
       inverseSide: 'employee',
       nullable: true
+    },
+    points: {
+      type: 'one-to-many',
+      target: 'point',
+      inverseSide: 'employee',
+      nullable: true
     }
   }
 })
