@@ -1,4 +1,4 @@
-import express from 'express'
+import { Router } from 'express'
 
 import { companyRoutes } from './companyRoutes'
 import { employeeRoutes } from './employeeRoutes'
@@ -6,7 +6,7 @@ import { addressRoutes } from './addressRoutes'
 import { absenceRoutes } from './absenceRoutes'
 import { pointRoutes } from './pointRoutes'
 
-export const apiRoutes = express.Router()
+export const apiRoutes = Router()
 
 apiRoutes.use('/api/v1/company', companyRoutes)
 apiRoutes.use('/api/v1/employee', employeeRoutes)

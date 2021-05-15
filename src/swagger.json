@@ -1,0 +1,1042 @@
+{
+	"swagger": "2.0",
+	"info": {
+		"version": " 1.0.0 ",
+		"title": "PointControl",
+		"description": "This is an API to save and track working hours records by employees of a company",
+		"author": "Leonardo Dias Lissone",
+		"Serget - Website": "http://pointcontrol.com.br/",
+		"termsOfService": "http://swagger.io/terms/",
+		"contact": {
+			"email": "leonardo.lissonez@gmail.com"
+		}
+	},
+	"host": "localhost:5000/api/",
+	"basePath": "v1",
+	"tags": [
+    {
+			"name": "Company",
+			"description": "Company in the point control microservice database"
+		},
+    {
+			"name": "Address",
+			"description": "Address in the point control microservice database"
+		},
+		{
+			"name": "Employee",
+			"description": "Employee in the point control microservice database"
+		},
+    {
+			"name": "Absence",
+			"description": "Absence in the point control microservice database"
+		},
+    {
+			"name": "Point",
+			"description": "Point in the point control microservice database"
+		}
+	],
+	"paths": {
+    "/company/": {
+      "get": {
+				"tags": [
+					"Company"
+				],
+				"summary": "Get a list of all companies directly in the database",
+				"produces": [
+					"application/json"
+				],
+				"responses": {
+					"200": {
+						"description": "Ok",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "$ref": "#/definitions/Company"
+              }
+						}
+					},
+          "500": {
+            "description": "Internal Server Error"
+          }
+				}
+			}
+    },
+    "/company/{cnpj}": {
+      "parameters": [
+				{
+					"name": "cnpj",
+					"in": "path",
+					"required": true,
+					"description": "Company's identify document",
+					"type": "string"
+				}
+			],
+      "get": {
+				"tags": [
+					"Company"
+				],
+				"summary": "Get an company for your cnpj directly from the database",
+				"produces": [
+					"application/json"
+				],
+				"responses": {
+					"200": {
+						"description": "Ok",
+            "schema": {
+              "$ref": "#/definitions/Company"
+						}
+					},
+					"404": {
+						"description": "Not found"
+					},
+          "500": {
+            "description": "Internal Server Error"
+          }
+				}
+			}
+    },
+    "/company": {
+			"post": {
+				"tags": [
+					"Company"
+				],
+				"summary": "Insert a new company in the database",
+				"consumes": [
+					"application/json"
+				],
+				"produces": [
+					"application/json"
+				],
+				"parameters": [
+          {
+						"name": "company",
+						"in": "body",
+						"required": true,
+						"description": "Company entity in the db",
+						"schema": {
+							"type": "object",
+							"properties": {
+								"street": {
+									"type": "string"
+								},
+								"district": {
+									"type": "string"
+								},
+								"city": {
+									"type": "string"
+								},
+								"state": {
+									"type": "string"
+								}
+							}
+						}
+					}
+				],
+				"responses": {
+					"201": {
+						"description": "Created",
+						"schema": {
+							"type": "object",
+							"properties": {
+								"id": {
+									"type": "integer"
+								},
+								"street": {
+									"type": "string"
+								},
+								"district": {
+									"type": "string"
+								},
+								"city": {
+									"type": "string"
+								},
+								"state": {
+									"type": "string"
+								},
+								"createdAt": {
+									"type": "date-time",
+									"example": "2021-01-30T08:30:00Z"
+								},
+								"updatedAt": {
+									"type": "date-time",
+									"example": "2021-01-30T08:30:00Z"
+								}
+							}
+						}
+					},
+					"500": {
+						"description": "Company already exists"
+					}
+				}
+			}
+		},
+    "/address/": {
+      "get": {
+				"tags": [
+					"Address"
+				],
+				"summary": "Get a list of all adresses directly in the database",
+				"produces": [
+					"application/json"
+				],
+				"responses": {
+					"200": {
+						"description": "Ok",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "$ref": "#/definitions/Address"
+              }
+						}
+					},
+          "500": {
+            "description": "Internal Server Error"
+          }
+				}
+			}
+    },
+    "/address/{id}": {
+      "parameters": [
+				{
+					"name": "id",
+					"in": "path",
+					"required": true,
+					"description": "Address's number identify",
+					"type": "integer"
+				}
+			],
+      "get": {
+				"tags": [
+					"Address"
+				],
+				"summary": "Get an address for your number identify directly from the database",
+				"produces": [
+					"application/json"
+				],
+				"responses": {
+					"200": {
+						"description": "Ok",
+            "schema": {
+              "$ref": "#/definitions/Address"
+						}
+					},
+					"404": {
+						"description": "Not found"
+					},
+          "500": {
+            "description": "Internal Server Error"
+          }
+				}
+			}
+    },
+    "/address": {
+			"post": {
+				"tags": [
+					"Address"
+				],
+				"summary": "Insert an employee's address into the databasee",
+				"consumes": [
+					"application/json"
+				],
+				"produces": [
+					"application/json"
+				],
+				"parameters": [
+          {
+						"name": "address",
+						"in": "body",
+						"required": true,
+						"description": "Address entity in the db",
+						"schema": {
+							"type": "object",
+							"properties": {
+                "street": {
+                  "type": "string"
+                },
+                "district": {
+                  "type": "string"
+                },
+                "city": {
+                  "type": "string"
+                },
+                "state": {
+                  "type": "string"
+                }
+              }
+						}
+					}
+				],
+				"responses": {
+					"201": {
+						"description": "Created",
+						"schema": {
+							"$ref": "#/definitions/Address"
+						}
+					},
+					"500": {
+						"description": "Internal Server Error"
+					}
+				}
+			}
+		},
+		"/employee/": {
+			"get": {
+				"tags": [
+					"Employee"
+				],
+				"summary": "Get a list of all employees directly in the database",
+				"produces": [
+					"application/json"
+				],
+				"responses": {
+					"200": {
+						"description": "Ok",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "$ref": "#/definitions/Employee"
+              }
+						}
+					},
+          "500": {
+            "description": "Internal Server Error"
+          }
+				}
+			}
+		},
+    "/employee/{cpf}": {
+      "parameters": [
+				{
+					"name": "cpf",
+					"in": "path",
+					"required": true,
+					"description": "Employee's identify document",
+					"type": "string"
+				}
+			],
+			"get": {
+				"tags": [
+					"Employee"
+				],
+				"summary": "Get an employee for your cpf directly from the database",
+				"produces": [
+					"application/json"
+				],
+				"responses": {
+					"200": {
+						"description": "Ok",
+            "schema": {
+							"$ref": "#/definitions/Employee"
+						}
+					},
+          "404": {
+						"description": "Not found"
+					},
+          "500": {
+            "description": "Internal Server Error"
+          }
+				}
+			}
+		},
+    "/employee": {
+			"post": {
+				"tags": [
+					"Employee"
+				],
+				"summary": "Insert a new employee in the database",
+				"consumes": [
+					"application/json"
+				],
+				"produces": [
+					"application/json"
+				],
+				"parameters": [
+          {
+						"name": "employee",
+						"in": "body",
+						"required": true,
+						"description": "Employee entity in the db",
+						"schema": {
+							"type": "object",
+							"properties": {
+								"cpf": {
+									"type": "string"
+								},
+								"name": {
+									"type": "string"
+								},
+								"email": {
+									"type": "string"
+								},
+								"password": {
+									"type": "string"
+								},
+								"dtBirth": {
+									"type": "date-time",
+									"example": "2001-12-11T22:30:00Z"
+								},
+								"entry": {
+									"type": "date-time",
+									"example": "2021-01-30T08:00:00Z"
+								},
+								"exit": {
+									"type": "date-time",
+									"example": "2021-01-30T15:00:00Z"
+								},
+								"workingTime": {
+									"type": "integer"
+								},
+								"role": {
+									"type": "string"
+								},
+								"access": {
+									"type": "integer"
+								},
+								"companyCpf": {
+									"type": "string"
+								},
+								"addressId": {
+									"type": "integer"
+								}
+							}
+						}
+					}
+				],
+				"responses": {
+					"201": {
+						"description": "Created",
+						"schema": {
+							"$ref": "#/definitions/Employee"
+						}
+					},
+					"500": {
+						"description": "Employee already exists"
+					}
+				}
+			}
+		},
+    "/employee/{cpf}/": {
+			"put": {
+				"tags": [
+					"Employee"
+				],
+				"summary": "Update a employee in the database",
+				"consumes": [
+					"application/json"
+				],
+				"produces": [
+					"application/json"
+				],
+				"parameters": [
+          {
+            "name": "cpf",
+            "in": "path",
+            "required": true,
+            "description": "Employee's identify document",
+            "type": "string"
+          },
+          {
+						"name": "employee",
+						"in": "body",
+						"required": true,
+						"description": "Employee entity in the db",
+						"schema": {
+							"type": "object",
+							"properties": {
+								"cpf": {
+									"type": "string"
+								},
+								"name": {
+									"type": "string"
+								},
+								"email": {
+									"type": "string"
+								},
+								"password": {
+									"type": "string"
+								},
+								"dtBirth": {
+									"type": "date-time",
+									"example": "2001-12-11T22:30:00Z"
+								},
+								"entry": {
+									"type": "date-time",
+									"example": "2021-01-30T08:00:00Z"
+								},
+								"exit": {
+									"type": "date-time",
+									"example": "2021-01-30T15:00:00Z"
+								},
+								"workingTime": {
+									"type": "integer"
+								},
+								"role": {
+									"type": "string"
+								},
+								"access": {
+									"type": "integer"
+								},
+								"companyCpf": {
+									"type": "string"
+								},
+								"addressId": {
+									"type": "integer"
+								},
+								"createdAt": {
+									"type": "date-time",
+									"example": "2021-01-30T08:30:00Z"
+								},
+								"updatedAt": {
+									"type": "date-time",
+									"example": "2021-01-30T08:30:00Z"
+								}
+							}
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"schema": {
+							"$ref": "#/definitions/Employee"
+						}
+					},
+          "400": {
+						"description": "Bad request"
+					},
+          "404": {
+						"description": "Not found"
+					},
+          "500": {
+						"description": "Internal Server Error"
+					}
+				}
+			}
+		},
+    "/absence/": {
+			"get": {
+				"tags": [
+					"Absence"
+				],
+				"summary": "Get a list of all employee absences directly in the database",
+				"produces": [
+					"application/json"
+				],
+				"responses": {
+					"200": {
+						"description": "Ok",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "$ref": "#/definitions/Absence"
+              }
+						}
+					},
+          "500": {
+            "description": "Internal Server Error"
+          }
+				}
+			}
+		},
+    "/absence/{id}": {
+      "parameters": [
+				{
+					"name": "id",
+					"in": "path",
+					"required": true,
+					"description": "Absence's identify number",
+					"type": "integer"
+				}
+			],
+			"get": {
+				"tags": [
+					"Absence"
+				],
+				"summary": "Get an absence for your indentify number directly from the database",
+				"produces": [
+					"application/json"
+				],
+				"responses": {
+					"200": {
+						"description": "Ok",
+            "schema": {
+							"$ref": "#/definitions/Absence"
+						}
+					},
+          "404": {
+						"description": "Not found"
+					},
+          "500": {
+            "description": "Internal Server Error"
+          }
+				}
+			}
+		},
+    "/absence": {
+			"post": {
+				"tags": [
+					"Absence"
+				],
+				"summary": "Insert the absence of the employee in the database",
+				"consumes": [
+					"application/json"
+				],
+				"produces": [
+					"application/json"
+				],
+				"parameters": [
+          {
+						"name": "absence",
+						"in": "body",
+						"required": true,
+						"description": "Absence entity in the db",
+						"schema": {
+							"type": "object",
+							"properties": {
+                "type": {
+                  "type": "string"
+                },
+                "description": {
+                  "type": "string"
+                },
+                "startTime": {
+                  "type": "date-time",
+                  "example": "2021-01-30T15:00:00Z"
+                },
+                "endTime": {
+                  "type": "date-time",
+                  "example": "2021-01-30T15:00:00Z"
+                },
+                "employeeCpf": {
+                  "type": "string"
+                }
+              }
+						}
+					}
+				],
+				"responses": {
+					"201": {
+						"description": "Created",
+						"schema": {
+							"$ref": "#/definitions/Absence"
+						}
+					},
+					"500": {
+						"description": "Internal Server Error"
+					}
+				}
+			}
+		},
+    "/absence/{id}/": {
+			"put": {
+				"tags": [
+					"Absence"
+				],
+				"summary": "Update the employee's absence in the database",
+				"consumes": [
+					"application/json"
+				],
+				"produces": [
+					"application/json"
+				],
+				"parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "Absence identify number of database",
+            "type": "number"
+          },
+          {
+						"name": "absence",
+						"in": "body",
+						"required": true,
+						"description": "Absence entity in the db",
+						"schema": {
+							"type": "object",
+							"properties": {
+                "id": {
+                  "type": "integer"
+                },
+                "type": {
+                  "type": "string"
+                },
+                "description": {
+                  "type": "string"
+                },
+                "startTime": {
+                  "type": "date-time",
+                  "example": "2021-01-30T15:00:00Z"
+                },
+                "endTime": {
+                  "type": "date-time",
+                  "example": "2021-01-30T15:00:00Z"
+                },
+                "employeeCpf": {
+                  "type": "string"
+                },
+                "createdAt": {
+                  "type": "date-time",
+                  "example": "2021-01-30T08:30:00Z"
+                },
+                "updatedAt": {
+                  "type": "date-time",
+                  "example": "2021-01-30T08:30:00Z"
+                }
+              }
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"schema": {
+							"$ref": "#/definitions/Absence"
+						}
+					},
+          "400": {
+						"description": "Bad request"
+					},
+          "404": {
+						"description": "Not found"
+					},
+          "500": {
+						"description": "Internal Server Error"
+					}
+				}
+			}
+		},
+    "/absence/{ id }": {
+      "parameters": [
+				{
+					"name": "id",
+					"in": "path",
+					"required": true,
+					"description": "Absence's identify number",
+					"type": "integer"
+				}
+			],
+			"delete": {
+				"tags": [
+					"Absence"
+				],
+				"summary": "Delete an absence for your indentify number directly from the database",
+				"produces": [
+					"application/json"
+				],
+				"responses": {
+					"200": {
+						"description": "Ok"
+					},
+          "404": {
+						"description": "Not found"
+					},
+          "500": {
+            "description": "Internal Server Error"
+          }
+				}
+			}
+		},
+    "/point/": {
+      "get": {
+				"tags": [
+					"Point"
+				],
+				"summary": "Get a list of all points directly in the database",
+				"produces": [
+					"application/json"
+				],
+				"responses": {
+					"200": {
+						"description": "Ok",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "$ref": "#/definitions/Point"
+              }
+						}
+					},
+          "500": {
+            "description": "Internal Server Error"
+          }
+				}
+			}
+    },
+    "/point/{id}": {
+      "parameters": [
+				{
+					"name": "id",
+					"in": "path",
+					"required": true,
+					"description": "Point's number identify",
+					"type": "integer"
+				}
+			],
+      "get": {
+				"tags": [
+					"Point"
+				],
+				"summary": "Get an point for your number identify directly from the database",
+				"produces": [
+					"application/json"
+				],
+				"responses": {
+					"200": {
+						"description": "Ok",
+            "schema": {
+              "$ref": "#/definitions/Point"
+						}
+					},
+					"404": {
+						"description": "Not found"
+					},
+          "500": {
+            "description": "Internal Server Error"
+          }
+				}
+			}
+    },
+    "/point": {
+			"post": {
+				"tags": [
+					"Point"
+				],
+				"summary": "Insert an employee's point into the databasee",
+				"consumes": [
+					"application/json"
+				],
+				"produces": [
+					"application/json"
+				],
+				"parameters": [
+          {
+						"name": "point",
+						"in": "body",
+						"required": true,
+						"description": "Point entity in the db",
+						"schema": {
+							"type": "object",
+							"properties": {
+                "employeeCpf": {
+                  "type": "string"
+                }
+              }
+						}
+					}
+				],
+				"responses": {
+					"201": {
+						"description": "Created",
+						"schema": {
+							"$ref": "#/definitions/Point"
+						}
+					},
+					"500": {
+						"description": "Internal Server Error"
+					}
+				}
+			}
+		}
+	},
+	"definitions": {
+    "Employee": {
+			"type": "object",
+			"properties": {
+				"cpf": {
+					"type": "string"
+				},
+        "name": {
+					"type": "string"
+				},
+				"email": {
+					"type": "string"
+				},
+				"password": {
+					"type": "string"
+				},
+        "dtBirth": {
+					"type": "date-time",
+          "example": "2001-12-11T22:30:00Z"
+				},
+				"entry": {
+					"type": "date-time",
+          "example": "2021-01-30T08:00:00Z"
+				},
+        "exit": {
+					"type": "date-time",
+          "example": "2021-01-30T15:00:00Z"
+				},
+        "workingTime": {
+					"type": "integer"
+				},
+        "role": {
+					"type": "string"
+				},
+        "access": {
+					"type": "integer"
+				},
+        "companyCpf": {
+					"type": "string"
+				},
+        "addressId": {
+					"type": "integer"
+				},
+        "createdAt": {
+          "type": "date-time",
+          "example": "2021-01-30T08:30:00Z"
+        },
+        "updatedAt": {
+          "type": "date-time",
+          "example": "2021-01-30T08:30:00Z"
+        },
+        "company": {
+          "type": "object",
+					"$ref": "#/definitions/Company"
+        },
+        "points": {
+          "type": "array",
+          "items": {
+						"$ref": "#/definitions/Point"
+          }
+        },
+        "absences": {
+          "type": "array",
+          "items": {
+						"$ref": "#/definitions/Absence"
+          }
+        }
+			}
+		},
+    "Address": {
+			"type": "object",
+			"properties": {
+				"id": {
+					"type": "integer"
+				},
+        "street": {
+					"type": "string"
+				},
+				"district": {
+					"type": "string"
+				},
+				"city": {
+					"type": "string"
+				},
+        "state": {
+					"type": "string"
+				},
+        "createdAt": {
+          "type": "date-time",
+          "example": "2021-01-30T08:30:00Z"
+        },
+        "updatedAt": {
+          "type": "date-time",
+          "example": "2021-01-30T08:30:00Z"
+        },
+        "employee": {
+          "type": "object",
+					"$ref": "#/definitions/Employee"
+        }
+			}
+		},
+    "Company": {
+			"type": "object",
+			"properties": {
+				"id": {
+					"type": "integer"
+				},
+				"street": {
+					"type": "string"
+				},
+				"district": {
+					"type": "string"
+				},
+				"city": {
+					"type": "string"
+				},
+				"state": {
+					"type": "string"
+				},
+        "createdAt": {
+          "type": "date-time",
+          "example": "2021-01-30T08:30:00Z"
+        },
+        "updatedAt": {
+          "type": "date-time",
+          "example": "2021-01-30T08:30:00Z"
+        },
+        "employees": {
+          "type": "array",
+          "items": {
+						"$ref": "#/definitions/Employee"
+          }
+        }
+			}
+		},
+    "Absence": {
+			"type": "object",
+			"properties": {
+				"id": {
+					"type": "integer"
+				},
+				"type": {
+					"type": "string"
+				},
+				"description": {
+					"type": "string"
+				},
+				"startTime": {
+					"type": "date-time",
+          "example": "2021-01-30T15:00:00Z"
+				},
+				"endTime": {
+					"type": "date-time",
+          "example": "2021-01-30T15:00:00Z"
+				},
+        "employeeCpf": {
+					"type": "string"
+				},
+        "createdAt": {
+          "type": "date-time",
+          "example": "2021-01-30T08:30:00Z"
+        },
+        "updatedAt": {
+          "type": "date-time",
+          "example": "2021-01-30T08:30:00Z"
+        },
+        "employee": {
+          "type": "object",
+					"$ref": "#/definitions/Employee"
+        }
+			}
+		},
+    "Point": {
+			"type": "object",
+			"properties": {
+				"id": {
+					"type": "integer"
+				},
+        "employeeCpf": {
+					"type": "string"
+				},
+        "createdAt": {
+          "type": "date-time",
+          "example": "2021-01-30T08:30:00Z"
+        },
+        "updatedAt": {
+          "type": "date-time",
+          "example": "2021-01-30T08:30:00Z"
+        },
+        "employee": {
+          "type": "object",
+					"$ref": "#/definitions/Employee"
+        }
+			}
+		}
+	}
+}
