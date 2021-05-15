@@ -1,8 +1,28 @@
-# PointControl - API
+<h1 align="center">
+  PointControl - API
+</h1>
 
+<p align="center">
+  <a href="#descrição">Descrição</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <a href="#requerimentos">Requerimentos</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <a href="#tecnologias">Tecnologias</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <a href="#instalando">Dependencias</a>
+</p>
+
+<p align="center">
+ <img src="https://img.shields.io/static/v1?label=PRs&message=welcome&color=49AA26&labelColor=000000" alt="PRs welcome!" />
+
+  <img alt="License" src="https://img.shields.io/static/v1?label=license&message=MIT&color=49AA26&labelColor=000000">
+</p>
+
+<br>
+
+## Descrição
 Api de uma aplicação de controle de pontos de empresas.
 
 Estrutura de pastas baseada na clean architecture.
+
+Criada a documentação da api utlizando swagger. (Página inicial da aplicação)
 
 ### Requerimentos
 
@@ -10,13 +30,15 @@ Estrutura de pastas baseada na clean architecture.
 * [SqlServer](https://www.microsoft.com/pt-br/sql-server/sql-server-downloads)
 * [Nodejs](https://nodejs.org/en/)
 
-### Dependências
+### Tecnologias
 
+* Typescript
 * Express
 * Nodemon
 * TypeORM
 * ESLint
 * Prettier
+* Swagger
 
 ### Instalando Dependencias
 
