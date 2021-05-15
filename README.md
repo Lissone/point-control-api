@@ -53,7 +53,7 @@ npm run
 
 ### Configurações do Banco de dados
 
-É necessário criar o database antes de executar o projeto (dbPointControl).
+É necessário criar o database antes de executar o projeto (dbPointControl), e alterar as variáveis de ambiente, encontradas no arquivo: .env.
 
 ```typescript
 // .\src\external\database\dbConfig.ts
