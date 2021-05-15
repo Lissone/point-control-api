@@ -54,11 +54,6 @@ export const EmployeeEntity = new EntitySchema<IEmployee>({
       type: String,
       nullable: true,
     },
-    addressId: {
-      name: 'address_id',
-      type: Number,
-      nullable: true,
-    },
     createdAt: {
       name: 'created_at',
       type: 'datetime2',
@@ -81,10 +76,8 @@ export const EmployeeEntity = new EntitySchema<IEmployee>({
     },
     address: {
       type: 'one-to-one',
-      joinColumn: ({
-        name: 'address_id'
-      }),
       target: 'address',
+      inverseSide: 'employee',
       nullable: true
     },
     absences: {

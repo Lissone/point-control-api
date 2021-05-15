@@ -26,6 +26,11 @@ export const AddressEntity = new EntitySchema<IAddress>({
       type: String,
       nullable: false
     },
+    employeeCpf: {
+      name: 'employee_cpf',
+      type: String,
+      nullable: false
+    },
     createdAt: {
       name: 'created_at',
       type: 'datetime2',
@@ -40,9 +45,11 @@ export const AddressEntity = new EntitySchema<IAddress>({
   relations: {
     employee: {
       type: 'one-to-one',
+      joinColumn: ({
+        name: 'employee_cpf'
+      }),
       target: 'employee',
-      inverseSide: 'address',
-      nullable: true
+      nullable: false
     }
   }
 })

@@ -6,7 +6,8 @@ export interface IAddress {
   district: string
   city: string
   state: string
+  employeeCpf: string
   createdAt: Date
   updatedAt: Date
-  employee?: IEmployee
+  employee: IEmployee
 }

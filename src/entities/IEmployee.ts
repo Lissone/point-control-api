@@ -15,7 +15,6 @@ export interface IEmployee {
   role: string
   access: number
   companyCnpj?: string
-  addressId?: number
   createdAt: Date
   updatedAt: Date
   company?: ICompany

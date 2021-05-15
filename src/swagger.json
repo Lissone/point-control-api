@@ -117,19 +117,13 @@
 						"schema": {
 							"type": "object",
 							"properties": {
-								"street": {
-									"type": "string"
-								},
-								"district": {
-									"type": "string"
-								},
-								"city": {
-									"type": "string"
-								},
-								"state": {
-									"type": "string"
-								}
-							}
+                "cnpj": {
+                  "type": "string"
+                },
+                "name": {
+                  "type": "string"
+                }
+              }
 						}
 					}
 				],
@@ -137,32 +131,7 @@
 					"201": {
 						"description": "Created",
 						"schema": {
-							"type": "object",
-							"properties": {
-								"id": {
-									"type": "integer"
-								},
-								"street": {
-									"type": "string"
-								},
-								"district": {
-									"type": "string"
-								},
-								"city": {
-									"type": "string"
-								},
-								"state": {
-									"type": "string"
-								},
-								"createdAt": {
-									"type": "date-time",
-									"example": "2021-01-30T08:30:00Z"
-								},
-								"updatedAt": {
-									"type": "date-time",
-									"example": "2021-01-30T08:30:00Z"
-								}
-							}
+							"$ref": "#/definitions/Company"
 						}
 					},
 					"500": {
@@ -262,6 +231,9 @@
                   "type": "string"
                 },
                 "state": {
+                  "type": "string"
+                },
+                "employeeCpf": {
                   "type": "string"
                 }
               }
@@ -397,9 +369,6 @@
 								},
 								"companyCpf": {
 									"type": "string"
-								},
-								"addressId": {
-									"type": "integer"
 								}
 							}
 						}
@@ -481,9 +450,6 @@
 								},
 								"companyCpf": {
 									"type": "string"
-								},
-								"addressId": {
-									"type": "integer"
 								},
 								"createdAt": {
 									"type": "date-time",
@@ -883,9 +849,6 @@
         "companyCpf": {
 					"type": "string"
 				},
-        "addressId": {
-					"type": "integer"
-				},
         "createdAt": {
           "type": "date-time",
           "example": "2021-01-30T08:30:00Z"
@@ -927,6 +890,9 @@
 				"city": {
 					"type": "string"
 				},
+        "employeeCpf": {
+					"type": "string"
+				},
         "state": {
 					"type": "string"
 				},
@@ -947,19 +913,10 @@
     "Company": {
 			"type": "object",
 			"properties": {
-				"id": {
-					"type": "integer"
-				},
-				"street": {
+				"cnpj": {
 					"type": "string"
 				},
-				"district": {
-					"type": "string"
-				},
-				"city": {
-					"type": "string"
-				},
-				"state": {
+				"name": {
 					"type": "string"
 				},
         "createdAt": {
