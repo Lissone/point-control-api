@@ -24,7 +24,7 @@ Estrutura de pastas baseada na clean architecture.
 
 Criada a documentação da api utlizando swagger. (Página inicial da aplicação)
 
-* Flowchart do projeto completo: https://whimsical.com/pointcontrol-5dryUV3teiRwy1rPzH3ekK
+Flowchart do projeto completo: https://whimsical.com/pointcontrol-5dryUV3teiRwy1rPzH3ekK
 
 ### Requerimentos
 
