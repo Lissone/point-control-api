@@ -1,6 +1,6 @@
 {
-  "name": "pointControl-api",
-  "version": "1.0.0",
+  "name": "point-control-api",
+  "version": "1.0.1",
   "description": "Api de uma aplicação de controle de pontos de empresas.",
   "main": "server.ts",
   "repository": "https://github.com/Lissone/pointControl-api.git",

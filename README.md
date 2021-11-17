@@ -31,7 +31,7 @@
 
 Api of a company points control application.
 
-Projeto desenvolvido como atividade do meu curso bacharelado de sistemas de informação, com o intuito de servir como back end para aplicação de controle de ponto de empresas, com compatibilidade web e mobile. A estrutura da api foi criada baseada na clean architecture e documentada com Swagger (On api homepage).
+Project developed as an activity of my bachelor's course in information systems, in order to serve as a back end for corporate time attendance application, with web and mobile compatibility. The api structure was created based on clean architecture and documented with Swagger (On api homepage).
 
 For the development of this project, a flowchart was created as application documentation on <a href="https://whimsical.com/pointcontrol-5dryUV3teiRwy1rPzH3ekK" target="_blank">Whimsical</a>.
 
