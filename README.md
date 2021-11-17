@@ -31,11 +31,9 @@
 
 Api of a company points control application.
 
-Mass structure based on clean architecture.
+Projeto desenvolvido como atividade do meu curso bacharelado de sistemas de informação, com o intuito de servir como back end para aplicação de controle de ponto de empresas, com compatibilidade web e mobile. A estrutura da api foi criada baseada na clean architecture e documentada com Swagger (On api homepage).
 
-Created api documents using swagger (Application homepage).
-
-Complete project flowchart created on <a href="https://whimsical.com/pointcontrol-5dryUV3teiRwy1rPzH3ekK" target="_blank">Whimsical</a>.
+For the development of this project, a flowchart was created as application documentation on <a href="https://whimsical.com/pointcontrol-5dryUV3teiRwy1rPzH3ekK" target="_blank">Whimsical</a>.
 
 ## Requirements
 
