@@ -1,62 +1,77 @@
 <h1 align="center">
-  PointControl - API
+  PointControl - Api
 </h1>
 
 <p align="center">
-  <a href="#descrição">Descrição</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-  <a href="#requerimentos">Requerimentos</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-  <a href="#tecnologias">Tecnologias</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-  <a href="#instalando">Dependencias</a>
+  <a href="#description">Description</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <a href="#requirements">Requirements</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <a href="#technologies">Technologies</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <a href="#usage">Usage</a>
+</p>
+<br />
+<p align="center">
+  <img src="https://img.shields.io/static/v1?label=license&message=MIT" alt="License">
+  <img src="https://img.shields.io/github/repo-size/Lissone/point-control-api" alt="Repo size" />
+  <img src="https://img.shields.io/github/languages/top/Lissone/point-control-api" alt="Top lang" />
+  <img src="https://img.shields.io/github/stars/Lissone/point-control-api" alt="Stars repo" />
+  <img src="https://img.shields.io/github/forks/Lissone/point-control-api" alt="Forks repo" />
+  <img src="https://img.shields.io/github/issues-pr/Lissone/point-control-api" alt="Pull requests" >
+  <img src="https://img.shields.io/github/last-commit/Lissone/point-control-api" alt="Last commit" />
 </p>
 
 <p align="center">
- <img src="https://img.shields.io/static/v1?label=PRs&message=welcome&color=49AA26&labelColor=000000" alt="PRs welcome!" />
-
-  <img alt="License" src="https://img.shields.io/static/v1?label=license&message=MIT&color=49AA26&labelColor=000000">
+  <a href="https://github.com/Lissone/point-control-api/issues">Report bug</a>
+  ·
+  <a href="https://github.com/Lissone/point-control-api/issues">Request feature</a>
 </p>
 
-<br>
+<br />
 
-## Descrição
-Api de uma aplicação de controle de pontos de empresas.
+## Description
 
-Estrutura de pastas baseada na clean architecture.
+Api of a company points control application.
 
-Criada a documentação da api utlizando swagger. (Página inicial da aplicação)
+Mass structure based on clean architecture.
 
-Flowchart do projeto completo: https://whimsical.com/pointcontrol-5dryUV3teiRwy1rPzH3ekK
+Created api documents using swagger (Application homepage).
 
-### Requerimentos
+Complete project flowchart created on <a href="https://whimsical.com/pointcontrol-5dryUV3teiRwy1rPzH3ekK" target="_blank">Whimsical</a>.
 
+## Requirements
+
+* [Npm](https://www.npmjs.com/)
 * [Yarn](https://yarnpkg.com/)
-* [SqlServer](https://www.microsoft.com/pt-br/sql-server/sql-server-downloads)
 * [Nodejs](https://nodejs.org/en/)
+* [SqlServer](https://www.microsoft.com/pt-br/sql-server/sql-server-downloads)
 
-### Tecnologias
+## Technologies
 
 * Typescript
 * Express
 * Nodemon
 * TypeORM
-* ESLint
+* Swagger (Documentation)
+* ESLint (Airbnb config)
 * Prettier
-* Swagger
 
-### Instalando Dependencias
+## Usage
 
+You can clone it on your pc using the command:
 ```bash
 git clone https://github.com/Lissone/pointControl-api.git
 cd pointControl-api
+```
 
+Install dependencies using:
+```bash
 yarn
 #or
 npm run
 ```
 
-### Configurações do Banco de dados
+### Database configuration
 
-É necessário criar o database antes de executar o projeto (dbPointControl), e alterar as variáveis de ambiente, encontradas no arquivo: .env.
-
+You must create the database before running an api (dbPointControl).
 ```typescript
 // .\src\external\database\dbConfig.ts
 
@@ -76,10 +91,34 @@ const connection = createConnection({
 })
 ```
 
-### Executar projeto
+Need to add environment variables:
+```bash
+# .\.env
 
+# DEFAULT
+PORT=5000
+
+# DATABASE
+DB_USERNAME=sa
+DB_PASSWORD=123456
+DB_NAME=dbPointControl
+DB_HOST=localhost
 ```
+
+Run api:
+```bash
 yarn dev
 #or
-npm run
+npm run dev
 ```
+
+## License
+
+Distributed under the MIT License. See `LICENSE` for more information.
+
+<h4 align="center">
+  Made with ❤️ by <a href="https://github.com/Lissone" target="_blank">Lissone</a>
+</h4>
+
+<hr />
+
