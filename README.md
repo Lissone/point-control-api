@@ -37,24 +37,26 @@ For the development of this project, a flowchart was created as application docu
 
 ## Requirements
 
-* [Npm](https://www.npmjs.com/)
-* [Yarn](https://yarnpkg.com/)
-* [Nodejs](https://nodejs.org/en/)
-* [SqlServer](https://www.microsoft.com/pt-br/sql-server/sql-server-downloads)
+- [Npm](https://www.npmjs.com/)
+- [Yarn](https://yarnpkg.com/)
+- [Nodejs](https://nodejs.org/en/)
+- [SqlServer](https://www.microsoft.com/pt-br/sql-server/sql-server-downloads)
 
 ## Technologies
 
-* Typescript
-* Express
-* Nodemon
-* TypeORM
-* Swagger (Documentation)
-* ESLint (Airbnb config)
-* Prettier
+- Nodejs
+- Typescript
+- Express
+- Nodemon
+- TypeORM
+- Swagger (Documentation)
+- ESLint (Airbnb config)
+- Prettier
 
 ## Usage
 
 You can clone it on your pc using the command:
+
 ```bash
 git clone https://github.com/Lissone/pointControl-api.git
 cd pointControl-api
@@ -64,12 +66,13 @@ Install dependencies using:
 ```bash
 yarn
 #or
-npm run
+npm install
 ```
 
 ### Database configuration
 
 You must create the database before running an api (dbPointControl).
+
 ```typescript
 // .\src\external\database\dbConfig.ts
 
@@ -90,6 +93,7 @@ const connection = createConnection({
 ```
 
 Need to add environment variables:
+
 ```bash
 # .\.env
 
@@ -104,6 +108,7 @@ DB_HOST=localhost
 ```
 
 Run api:
+
 ```bash
 yarn dev
 #or
