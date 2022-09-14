@@ -20,8 +20,7 @@ export const EmployeeEntity = new EntitySchema<IEmployee>({
     },
     password: {
       type: String,
-      nullable: false,
-      select: false
+      nullable: false
     },
     dtBirth: {
       name: 'birthday_date',
@@ -43,11 +42,6 @@ export const EmployeeEntity = new EntitySchema<IEmployee>({
     role: {
       type: String,
       nullable: false,
-    },
-    access: {
-      type: Number,
-      nullable: false,
-      default: 0
     },
     companyCnpj: {
       name: 'company_cnpj',

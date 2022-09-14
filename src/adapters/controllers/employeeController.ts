@@ -1,33 +1,30 @@
 import { Request, Response } from 'express'
 
-import { IEmployeeUseCase } from '@useCases/employee/IEmployeeUseCase'
+import { IEmployeeRepository } from '@interfaces/employee'
 
 export class EmployeeController {
-  useCase: IEmployeeUseCase
+  readonly repository: IEmployeeRepository
 
-  constructor (useCase: IEmployeeUseCase) {
-    this.useCase = useCase
+  constructor (repository: IEmployeeRepository) {
+    this.repository = repository
   }
 
-  async getAll (req: Request, res: Response) : Promise<void> {
+  async getAll (req: Request, res: Response) {
     try {
-      const employees = await this.useCase.getAll()
-
+      const employees = await this.repository.getAll()
       res.status(200).json(employees)
     } catch (err) {
       res.status(500).json({ message: err.message })
     }
   }
 
-  async getOne (req: Request, res: Response) : Promise<void> {
+  async getOne (req: Request, res: Response) {
     try {
       const { cpf } = req.params
-
-      const employee = await this.useCase.getOne(cpf)
-
-      if (employee == null) {
-        res.sendStatus(404)
-        return
+      const employee = await this.repository.getOne(cpf)
+      
+      if (!employee) {
+        return res.send(404).json({ message: 'Employee not found' })
       }
 
       res.status(200).json(employee)
@@ -36,35 +33,33 @@ export class EmployeeController {
     }
   }
 
-  async create (req: Request, res: Response) : Promise<void> {
+  async create (req: Request, res: Response) {
     try {
-      const employee = await this.useCase.create(req.body)
+      const { cpf } = req.body
+      let employee = await this.repository.getOne(cpf)
 
+      if (employee) {
+        return res.status(409).json({ message: 'Employee already exists' })
+      }
+
+      employee = await this.repository.create(req.body)
       res.status(201).send(employee)
     } catch (err) {
       res.status(500).json({ message: err.message })
     }
   }
 
-  async update (req: Request, res: Response) : Promise<void> {
+  async update (req: Request, res: Response) {
     try {
       const { cpf } = req.params
+      let employee = await this.repository.getOne(cpf)
 
-      if(cpf != req.body.cpf) {
-        res.sendStatus(400)
-        return
+      if (!employee) {
+        return res.send(404).json({ message: 'Employee not found' })
       }
 
-      const employee = await this.useCase.getOne(cpf)
-
-      if (employee == null) {
-        res.sendStatus(404)
-        return
-      }
-
-      const ret = await this.useCase.update(req.body)
-
-      res.status(200).json(ret)
+      employee = await this.repository.update(req.body)
+      res.status(200).json(employee)
     } catch (err) {
       res.status(500).json({ message: err.message })
     }

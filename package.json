@@ -10,14 +10,17 @@
     "dev": "nodemon -r tsconfig-paths/register src/external/server.ts"
   },
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.0",
     "cors": "^2.8.5",
     "dotenv": "^9.0.2",
     "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
     "mssql": "^6.2.1",
     "reflect-metadata": "^0.1.13",
     "swagger-ui-express": "^4.1.6",
-    "typeorm": "^0.2.32"
+    "typeorm": "^0.2.32",
+    "uuid": "^9.0.0"
   },
   "devDependencies": {
     "@types/body-parser": "^1.19.0",

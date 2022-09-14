@@ -1,4 +1,4 @@
-import { IEmployee } from "@entities/IEmployee";
+import { IEmployee } from '@entities/IEmployee'
 
 export interface IEmployeeRepository {
   getAll() : Promise<IEmployee[]>

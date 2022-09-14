@@ -1,8 +1,9 @@
 import { getRepository, Repository } from 'typeorm'
 
-import { IAbsence } from '@entities/IAbsence'
 import { AbsenceEntity } from '@external/database/entities/AbsenceEntity'
-import { IAbsenceRepository } from '@useCases/absence/IAbsenceRepository'
+
+import { IAbsence } from '@entities/IAbsence'
+import { IAbsenceRepository } from '@interfaces/absence'
 
 export class AbsenceRepository implements IAbsenceRepository {
 
@@ -11,29 +12,20 @@ export class AbsenceRepository implements IAbsenceRepository {
   }
 
   async getAll () : Promise<IAbsence[]> {
-    const ret = await this.repository.find({ relations: ['employee'] })
-
-    return ret
+    return await this.repository.find({ relations: ['employee'] })
   }
 
   async getOne (id: number) : Promise<IAbsence | undefined> {
-    const ret = await this.repository.findOne(id, { relations: ['employee'] })
-
-    return ret
+    return await this.repository.findOne(id, { relations: ['employee'] })
   }
 
-  async create (absence: IAbsence) : Promise<IAbsence> {
-    const obj = await this.repository.create(absence)
-
-    const ret = await this.repository.save(obj)
-
-    return ret
+  async create (dto: IAbsence) : Promise<IAbsence> {
+    const absence = this.repository.create(dto)
+    return await this.repository.save(absence)
   }
 
   async update (absence: IAbsence) : Promise<IAbsence> {
-    const ret = await this.repository.save(absence)
-
-    return ret
+    return await this.repository.save(absence)
   }
 
   async delete (id: number) : Promise<void> {

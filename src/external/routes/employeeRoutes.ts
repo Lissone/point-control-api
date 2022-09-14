@@ -1,16 +1,16 @@
 import { Router } from 'express'
 
+import { AuthMiddleware } from '@middlewares/authMiddleware'
+
 import { EmployeeRepository } from '@repositories/employeeRepository'
-import { EmployeeUseCase } from '@useCases/employee/employeeUseCase'
 import { EmployeeController } from '@controllers/employeeController'
 
 export const employeeRoutes = Router()
 
 const employeeRepository = new EmployeeRepository()
-const employeeUseCase = new EmployeeUseCase(employeeRepository)
-const employeeController = new EmployeeController(employeeUseCase)
+const employeeController = new EmployeeController(employeeRepository)
 
-employeeRoutes.get('/', (req, res) => employeeController.getAll(req, res))
-employeeRoutes.get('/:cpf', (req, res) => employeeController.getOne(req, res))
-employeeRoutes.post('/', (req, res) => employeeController.create(req, res))
-employeeRoutes.put('/:cpf', (req, res) => employeeController.update(req, res))
+employeeRoutes.get('/', AuthMiddleware, (req, res) => employeeController.getAll(req, res))
+employeeRoutes.get('/:cpf', AuthMiddleware, (req, res) => employeeController.getOne(req, res))
+employeeRoutes.post('/', AuthMiddleware, (req, res) => employeeController.create(req, res))
+employeeRoutes.put('/:cpf', AuthMiddleware, (req, res) => employeeController.update(req, res))

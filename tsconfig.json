@@ -7,7 +7,7 @@
     "outDir": "./dist",
     "rootDir": "./src",
     "removeComments": true,
-    "strict": true, // Dependendo do projeto sera necessario desabilitar
+    "strict": false, // Dependendo do projeto sera necessario desabilitar
     "typeRoots": [
       "./src/@types",
       "../../node_modules/@types",
@@ -24,8 +24,9 @@
       "@external/*": ["src/external/*"],
       "@entities/*": ["src/entities/*"],
       "@controllers/*": ["src/adapters/controllers/*"],
+      "@middlewares/*": ["src/adapters/middlewares/*"],
       "@repositories/*": ["src/adapters/repositories/*"],
-      "@useCases/*": ["./src/useCases/*"],
+      "@interfaces/*": ["src/interfaces/*"],
       "@shared/*": ["src/shared/*"],
     }
   }

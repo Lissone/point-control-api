@@ -13,7 +13,6 @@ export interface IEmployee {
   exit: Date
   workingTime: number
   role: string
-  access: number
   companyCnpj?: string
   createdAt: Date
   updatedAt: Date

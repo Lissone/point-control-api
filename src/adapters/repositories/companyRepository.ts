@@ -1,9 +1,9 @@
 import { getRepository, Repository } from 'typeorm'
 
-import { ICompany } from '@entities/ICompany'
 import { CompanyEntity } from '@external/database/entities/CompanyEntity'
 
-import { ICompanyRepository } from '@useCases/company/ICompanyRepository'
+import { ICompany } from '@entities/ICompany'
+import { ICompanyRepository } from '@interfaces/company'
 
 export class CompanyRepository implements ICompanyRepository {
 
@@ -12,22 +12,15 @@ export class CompanyRepository implements ICompanyRepository {
   }
 
   async getAll () : Promise<ICompany[]> {
-    const ret = await this.repository.find({ relations: ['employees']})
-
-    return ret
+    return await this.repository.find({ relations: ['employees']})
   }
 
   async getOne (cnpj: string) : Promise<ICompany | undefined> {
-    const ret = await this.repository.findOne(cnpj, { relations: ['employees']})
-
-    return ret
+    return await this.repository.findOne(cnpj, { relations: ['employees']})
   }
 
-  async create (data: ICompany) : Promise<ICompany> {
-    const obj = await this.repository.create(data)
-
-    const ret = await this.repository.save(obj)
-
-    return ret
+  async create (dto: ICompany) : Promise<ICompany> {
+    const company = this.repository.create(dto)
+    return await this.repository.save(company)
   }
 }

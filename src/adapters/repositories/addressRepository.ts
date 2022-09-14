@@ -1,8 +1,9 @@
 import { getRepository, Repository } from "typeorm"
 
-import { IAddress } from "@entities/IAddress"
 import { AddressEntity } from "@external/database/entities/AddressEntity"
-import { IAddressRepository } from "@useCases/address/IAddressRepository"
+
+import { IAddress } from "@entities/IAddress"
+import { IAddressRepository } from "@interfaces/address"
 
 export class AddressRepository implements IAddressRepository {
 
@@ -11,22 +12,15 @@ export class AddressRepository implements IAddressRepository {
   }
 
   async getAll () : Promise<IAddress[]> {
-    const ret = await this.repository.find({ relations: ['employee'] })
-
-    return ret
+    return await this.repository.find({ relations: ['employee'] })
   }
 
   async getOne (id: number) : Promise<IAddress | undefined> {
-    const ret = await this.repository.findOne(id, { relations: ['employee'] })
-
-    return ret
+    return await this.repository.findOne(id, { relations: ['employee'] })
   }
 
-  async create (address: IAddress) : Promise<IAddress> {
-    const obj = await this.repository.create(address)
-
-    const ret = await this.repository.save(obj)
-
-    return ret
+  async create (dto: IAddress) : Promise<IAddress> {
+    const address = this.repository.create(dto)
+    return await this.repository.save(address)
   }
 }

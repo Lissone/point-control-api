@@ -1,33 +1,30 @@
 import { Request, Response } from 'express'
 
-import { IPointUseCase } from '@useCases/point/IPointUseCase'
+import { IPointRepository } from '@interfaces/point'
 
 export class PointController {
-  useCase: IPointUseCase
-
-  constructor (useCase: IPointUseCase) {
-    this.useCase = useCase
+  readonly repository: IPointRepository
+  
+  constructor (repository: IPointRepository) {
+    this.repository = repository
   }
 
-  async getAll (req: Request, res: Response) : Promise<void> {
+  async getAll (req: Request, res: Response) {
     try {
-      const points = await this.useCase.getAll()
-
+      const points = await this.repository.getAll()
       res.status(200).json(points)
     } catch (err) {
       res.status(500).json({ message: err.message })
     }
   }
 
-  async getOne (req: Request, res: Response) : Promise<void> {
+  async getOne (req: Request, res: Response) {
     try {
       const { id } = req.params
+      const point = await this.repository.getOne(Number(id))
 
-      const point = await this.useCase.getOne(Number(id))
-
-      if (point == null) {
-        res.sendStatus(404)
-        return
+      if (!point) {
+        return res.send(404).json({ message: 'Point not found' })
       }
 
       res.status(200).json(point)
@@ -36,10 +33,9 @@ export class PointController {
     }
   }
 
-  async create (req: Request, res: Response) : Promise<void> {
+  async create (req: Request, res: Response) {
     try {
-      const point = await this.useCase.create(req.body)
-
+      const point = await this.repository.create(req.body)
       res.status(201).send(point)
     } catch (err) {
       res.status(500).json({ message: err.message })

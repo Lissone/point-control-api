@@ -1,8 +1,10 @@
 import { getRepository, Repository } from "typeorm"
 
-import { IPoint } from "@entities/IPoint"
 import { PointEntity } from "@external/database/entities/PointEntity"
-import { IPointRepository } from "@useCases/point/IPointRepository"
+
+import { IPoint } from "@entities/IPoint"
+import { IPointRepository } from "@interfaces/point"
+
 
 export class PointRepository implements IPointRepository {
 
@@ -11,22 +13,15 @@ export class PointRepository implements IPointRepository {
   }
 
   async getAll () : Promise<IPoint[]> {
-    const ret = await this.repository.find({ relations: ['employee'] })
-
-    return ret
+    return await this.repository.find({ relations: ['employee'] })
   }
 
   async getOne (id: number) : Promise<IPoint | undefined> {
-    const ret = await this.repository.findOne(id, { relations: ['employee'] })
-
-    return ret
+    return await this.repository.findOne(id, { relations: ['employee'] })
   }
 
-  async create (point: IPoint) : Promise<IPoint> {
-    const obj = await this.repository.create(point)
-
-    const ret = await this.repository.save(obj)
-
-    return ret
+  async create (dto: IPoint) : Promise<IPoint> {
+    const point = this.repository.create(dto)
+    return await this.repository.save(point)
   }
 }

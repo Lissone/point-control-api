@@ -1,15 +1,15 @@
 import { Router } from "express"
 
+import { AuthMiddleware } from '@middlewares/authMiddleware'
+
 import { AddressRepository } from "@repositories/addressRepository"
-import { AddressUseCase } from "@useCases/address/addressUseCase"
 import { AddressController } from "@controllers/addressController"
 
 export const addressRoutes = Router()
 
 const addressRepository = new AddressRepository()
-const addressUseCase = new AddressUseCase(addressRepository)
-const addressController = new AddressController(addressUseCase)
+const addressController = new AddressController(addressRepository)
 
-addressRoutes.get('/', (req, res) => addressController.getAll(req, res))
-addressRoutes.get('/:id', (req, res) => addressController.getOne(req, res))
-addressRoutes.post('/', (req, res) => addressController.create(req, res))
+addressRoutes.get('/', AuthMiddleware, (req, res) => addressController.getAll(req, res))
+addressRoutes.get('/:id', AuthMiddleware, (req, res) => addressController.getOne(req, res))
+addressRoutes.post('/', AuthMiddleware, (req, res) => addressController.create(req, res))
