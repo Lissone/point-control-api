@@ -1,7 +1,8 @@
-import { ICompany } from "@entities/ICompany";
+import { ICompany } from '@entities/ICompany'
 
-export interface ICompanyUseCase {
+export interface ICompanyRepository {
   getAll() : Promise<ICompany[]>
   getOne(cnpj: string) : Promise<ICompany | undefined>
   create(company: ICompany) : Promise<ICompany>
+  update(company: ICompany) : Promise<ICompany>
 }

@@ -1,9 +1,9 @@
 import { getRepository, Repository } from "typeorm"
 
-import { IEmployee } from "@entities/IEmployee"
 import { EmployeeEntity } from "@external/database/entities/EmployeeEntity"
 
-import { IEmployeeRepository } from "@useCases/employee/IEmployeeRepository"
+import { IEmployee } from "@entities/IEmployee"
+import { IEmployeeRepository } from "@interfaces/employee"
 
 export class EmployeeRepository implements IEmployeeRepository {
 
@@ -12,28 +12,31 @@ export class EmployeeRepository implements IEmployeeRepository {
   }
 
   async getAll () : Promise<IEmployee[]> {
-    const ret = await this.repository.find({ relations: ['company', 'address', 'absences', 'points'] })
-
-    return ret
+    return await this.repository.find({ 
+      relations: ['company', 'address', 'absences', 'points'] 
+    })
   }
 
+  async findByCompanyCnpj (companyCnpj: string) : Promise<IEmployee[]> {
+    return await this.repository.find({ 
+      where: { companyCnpj }, 
+      relations: ['company', 'address', 'absences', 'points'] 
+    })
+  }
+  
   async getOne (cpf: string) : Promise<IEmployee | undefined> {
-    const ret = await this.repository.findOne(cpf, { relations: ['company', 'address', 'absences', 'points'] })
-
-    return ret
+    return await this.repository.findOne(cpf, { 
+      relations: ['company', 'address', 'absences', 'points'] 
+    })
   }
 
-  async create (employee: IEmployee) : Promise<IEmployee> {
-    const obj = await this.repository.create(employee)
 
-    const ret = await this.repository.save(obj)
-
-    return ret
+  async create (dto: IEmployee) : Promise<IEmployee> {
+    const employee = this.repository.create(dto)
+    return await this.repository.save(employee)
   }
 
   async update (employee: IEmployee) : Promise<IEmployee> {
-    const ret = await this.repository.save(employee)
-
-    return ret
+    return await this.repository.save(employee)
   }
 }

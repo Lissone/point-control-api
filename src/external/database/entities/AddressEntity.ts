@@ -1,6 +1,6 @@
-import { EntitySchema } from "typeorm";
+import { EntitySchema } from 'typeorm'
 
-import { IAddress } from "@entities/IAddress";
+import { IAddress } from '@entities/IAddress'
 
 export const AddressEntity = new EntitySchema<IAddress>({
   name: 'address',

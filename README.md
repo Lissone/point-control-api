@@ -92,6 +92,26 @@ const connection = createConnection({
 })
 ```
 
+Need create first global admin user:
+
+Default password: 123
+
+```sql
+INSERT INTO [dbo].[user]
+(id, name, email, password, role, first_access, company_cnpj, created_at, updated_at)
+VALUES (
+  '08e5ad8d-5fa3-41a2-a732-b997336b4cf5', 
+  'Global Admin',
+  'admin@admin.com', 
+  '$2y$05$JdbLU5VqejoIstt/jtJva.PkydhrKCc5uRBdQpJY1RjooSE/hSprK', 
+  'global.admin',
+  1,
+  NULL, 
+  '2001-12-11T22:30:00Z',
+  '2001-12-11T22:30:00Z'
+)
+```
+
 Need to add environment variables:
 
 ```bash

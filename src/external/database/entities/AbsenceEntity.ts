@@ -1,5 +1,6 @@
-import { IAbsence } from '@entities/IAbsence'
 import { EntitySchema } from 'typeorm'
+
+import { IAbsence } from '@entities/IAbsence'
 
 export const AbsenceEntity = new EntitySchema<IAbsence>({
   name: 'absence',
@@ -9,13 +10,17 @@ export const AbsenceEntity = new EntitySchema<IAbsence>({
       primary: true,
       generated: true
     },
+    status: {
+      type: Number,
+      nullable: false
+    },
     type: {
       type: String,
       nullable: false
     },
     description: {
       type: String,
-      nullable: false
+      nullable: true
     },
     startTime: {
       name: 'start_time',
@@ -31,6 +36,10 @@ export const AbsenceEntity = new EntitySchema<IAbsence>({
       name: 'employee_cpf',
       type: String,
       nullable: false
+    },
+    justification: {
+      type: String,
+      nullable: true
     },
     createdAt: {
       name: 'created_at',
