@@ -27,26 +27,26 @@ export const EmployeeEntity = new EntitySchema<IEmployee>({
       type: 'datetime2'
     },
     entry: {
-      type: 'datetime2',
-      nullable: false,
+      type: String,
+      nullable: false
     },
     exit: {
-      type: 'datetime2',
-      nullable: false,
+      type: String,
+      nullable: false
     },
     workingTime: {
       name: 'working_time',
       type: Number,
-      nullable: false,
+      nullable: false
     },
     role: {
       type: String,
-      nullable: false,
+      nullable: false
     },
     companyCnpj: {
       name: 'company_cnpj',
       type: String,
-      nullable: true,
+      nullable: true
     },
     createdAt: {
       name: 'created_at',
@@ -56,7 +56,7 @@ export const EmployeeEntity = new EntitySchema<IEmployee>({
     updatedAt: {
       name: 'updated_at',
       type: 'datetime2',
-      updateDate: true,
+      updateDate: true
     }
   },
   relations: {
@@ -72,6 +72,8 @@ export const EmployeeEntity = new EntitySchema<IEmployee>({
       type: 'one-to-one',
       target: 'address',
       inverseSide: 'employee',
+      onUpdate: 'CASCADE',
+      cascade: true,
       nullable: true
     },
     absences: {

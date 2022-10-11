@@ -4,4 +4,5 @@ export interface ICompanyRepository {
   getAll() : Promise<ICompany[]>
   getOne(cnpj: string) : Promise<ICompany | undefined>
   create(company: ICompany) : Promise<ICompany>
+  update(company: ICompany) : Promise<ICompany>
 }

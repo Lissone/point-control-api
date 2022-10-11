@@ -1,6 +1,8 @@
 import jwt from 'jsonwebtoken'
 import { NextFunction, Request, Response } from 'express'
 
+import { UserDecodedPayload } from '@entities/IUser'
+
 const secretKey = process.env.SECRET_KEY
 
 function AuthMiddleware (req: Request, res: Response, next: NextFunction) {
@@ -20,7 +22,7 @@ function AuthMiddleware (req: Request, res: Response, next: NextFunction) {
     return res.status(401).json({ error: 'Token malformed' })
   }
 
-  jwt.verify(token, secretKey!, (err, decoded) => {
+  jwt.verify(token, secretKey!, (err, decoded: UserDecodedPayload) => {
     if (err) return res.status(401).json({ error: 'Token invalid' })
     req.body.userDecoded = {
       cpf: decoded?.cpf,

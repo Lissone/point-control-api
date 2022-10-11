@@ -1,5 +1,4 @@
 import express from 'express'
-import bodyParser from 'body-parser'
 import cors from 'cors'
 import swaggerUi from 'swagger-ui-express'
 
@@ -10,24 +9,10 @@ const app = express()
 
 app.disable('x-powered-by')
 
-const options: cors.CorsOptions = {
-  allowedHeaders: [
-    'Origin',
-    'X-Requested-With',
-    'Content-Type',
-    'Accept',
-    'X-Access-Token'
-  ],
-  credentials: true,
-  methods: 'GET,HEAD,OPTIONS,PUT,PATCH,POST,DELETE',
-  origin: '*',
-  preflightContinue: true
-}
+app.use(express.json())
+app.use(cors())
 
-app.use(bodyParser.json())
-app.use(bodyParser.urlencoded({ extended: true }))
-
-app.use(cors(options))
+app.options('*', cors())
 
 app.use(apiRoutes)
 

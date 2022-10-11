@@ -7,7 +7,7 @@
     "outDir": "./dist",
     "rootDir": "./src",
     "removeComments": true,
-    "strict": false, // Dependendo do projeto sera necessario desabilitar
+    "strict": false,
     "typeRoots": [
       "./src/@types",
       "../../node_modules/@types",

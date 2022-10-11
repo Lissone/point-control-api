@@ -1,18 +1,18 @@
 {
   "name": "point-control-api",
-  "version": "1.0.1",
+  "version": "1.1.1",
   "description": "Api de uma aplicação de controle de pontos de empresas.",
   "main": "server.ts",
-  "repository": "https://github.com/Lissone/pointControl-api.git",
-  "author": "Leonardo Dias Lissone",
+  "repository": "https://github.com/Lissone/point-control-api.git",
+  "author": "Leonardo Dias Lissone Santomero",
   "license": "MIT",
   "scripts": {
     "dev": "nodemon -r tsconfig-paths/register src/external/server.ts"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
-    "body-parser": "^1.19.0",
     "cors": "^2.8.5",
+    "date-fns": "^2.29.3",
     "dotenv": "^9.0.2",
     "express": "^4.17.1",
     "jsonwebtoken": "^8.5.1",
@@ -23,11 +23,13 @@
     "uuid": "^9.0.0"
   },
   "devDependencies": {
-    "@types/body-parser": "^1.19.0",
+    "@types/bcryptjs": "^2.4.2",
     "@types/cors": "^2.8.10",
     "@types/express": "^4.17.11",
+    "@types/jsonwebtoken": "^8.5.9",
     "@types/node": "^15.0.2",
     "@types/swagger-ui-express": "^4.1.2",
+    "@types/uuid": "^8.3.4",
     "@typescript-eslint/eslint-plugin": "^4.23.0",
     "@typescript-eslint/parser": "^4.23.0",
     "eslint": "^7.26.0",
@@ -38,7 +40,7 @@
     "eslint-plugin-prettier": "^3.4.0",
     "nodemon": "^2.0.7",
     "prettier": "^2.3.0",
-    "ts-node": "^9.1.1",
+    "ts-node": "^10.9.1",
     "tsconfig-paths": "^3.9.0",
     "typescript": "^4.2.4"
   }

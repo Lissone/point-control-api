@@ -11,16 +11,24 @@ export class UserRepository implements IUserRepository {
     return getRepository(UserEntity)
   }
 
-  async getOneByEmail (email: string) {
-    return await this.repository.findOne({ where: { email }})
+  async getAll () : Promise<IUser[]> {
+    return await this.repository.find({ relations: ['company']})
   }
 
-  async update (user: IUser) {
+  async getOne (id: string) : Promise<IUser | undefined> {
+    return await this.repository.findOne(id, { relations: ['company']})
+  }
+
+  async getOneByEmail (email: string) : Promise<IUser | undefined> {
+    return await this.repository.findOne({ where: { email },  relations: ['company']})
+  }
+
+  async create (dto: IUser) : Promise<IUser> {
+    const user = this.repository.create({ id: uuidv4(), firstAccess: true, ...dto })
     return await this.repository.save(user)
   }
 
-  async register (dto: IUser) {
-    const user = this.repository.create({ id: uuidv4(), ...dto })
+  async update (user: IUser) : Promise<IUser> {
     return await this.repository.save(user)
   }
 }

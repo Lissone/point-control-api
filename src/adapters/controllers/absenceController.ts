@@ -1,17 +1,54 @@
 import { Request, Response } from 'express'
 
 import { IAbsenceRepository } from '@interfaces/absence'
+import { IEmployeeRepository } from '@interfaces/employee'
+import { IUserRepository } from '@interfaces/user'
 
 export class AbsenceController {
-  repository: IAbsenceRepository
+  absenceRepository: IAbsenceRepository
+  employeeRepository: IEmployeeRepository
+  userRepository: IUserRepository
 
-  constructor (repository: IAbsenceRepository) {
-    this.repository = repository
+  constructor (
+    absenceRepository: IAbsenceRepository, 
+    employeeRepository: IEmployeeRepository,
+    userRepository: IUserRepository
+  ) {
+    this.absenceRepository = absenceRepository
+    this.employeeRepository = employeeRepository
+    this.userRepository = userRepository
   }
 
   async getAll (req: Request, res: Response) {
     try {
-      const absences = await this.repository.getAll()
+      const { userDecoded } = req.body
+      
+      const user = await this.userRepository.getOneByEmail(userDecoded.email)
+      const absences = await (
+        user.companyCnpj 
+        ? this.absenceRepository.findByCompanyCnpj(user.companyCnpj)
+        : this.absenceRepository.getAll()
+      )
+
+      if (!absences) {
+        return res.status(404).json({ message: 'Absences not found' })
+      }
+
+      res.status(200).json(absences)
+    } catch (err) {
+      res.status(500).json({ message: err.message })
+    }
+  }
+
+  async findByStatus (req: Request, res: Response) {
+    try {
+      const { status } = req.params
+
+      const absences = await this.absenceRepository.findByStatus(Number(status))
+      if (!absences) {
+        return res.status(404).json({ message: 'Absences not found' })
+      }
+
       res.status(200).json(absences)
     } catch (err) {
       res.status(500).json({ message: err.message })
@@ -21,10 +58,10 @@ export class AbsenceController {
   async getOne (req: Request, res: Response) {
     try {
       const { id } = req.params
-      const absence = await this.repository.getOne(Number(id))
 
+      const absence = await this.absenceRepository.getOne(Number(id))
       if (!absence) {
-        return res.send(404).json({ message: 'Absence not found' })
+        return res.status(404).json({ message: 'Absence not found' })
       }
 
       res.status(200).json(absence)
@@ -35,15 +72,16 @@ export class AbsenceController {
 
   async create (req: Request, res: Response) {
     try {
-      const { id } = req.body
-      let absence = await this.repository.getOne(id)
+      const { employeeCpf } = req.body
 
-      if (absence) {
-        return res.send(409).json({ message: 'Absence already exists' })
+      const employee = await this.employeeRepository.getOne(employeeCpf)
+      if (!employee) {
+        return res.status(404).json({ message: 'Employee not found' })
       }
 
-      absence = await this.repository.create(req.body)
-      res.status(201).send(absence)
+      const absence = await this.absenceRepository.create(req.body)
+
+      res.status(201).json(absence)
     } catch (err) {
       res.status(500).json({ message: err.message })
     }
@@ -52,13 +90,15 @@ export class AbsenceController {
   async update (req: Request, res: Response) {
     try {
       const { id } = req.params
-      const absence = await this.repository.getOne(Number(id))
 
+      const absence = await this.absenceRepository.getOne(Number(id))
       if (!absence) {
         return res.status(404).json({ message: 'Absence not found' })
       }
 
-      const ret = await this.repository.update(req.body)
+      delete req.body.userDecoded
+      const ret = await this.absenceRepository.update({...absence, ...req.body})
+
       res.status(200).json(ret)
     } catch (err) {
       res.status(500).json({ message: err.message })
@@ -68,13 +108,14 @@ export class AbsenceController {
   async delete (req: Request, res: Response) {
     try {
       const { id } = req.params
-      const absence = await this.repository.getOne(Number(id))
 
+      const absence = await this.absenceRepository.getOne(Number(id))
       if (!absence) {
         return res.status(404).json({ message: 'Absence not found' })
       }
 
-      await this.repository.delete(Number(id))
+      await this.absenceRepository.delete(Number(id))
+      
       res.sendStatus(200)
     } catch (err) {
       res.status(500).json({ message: err.message })

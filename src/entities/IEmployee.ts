@@ -9,8 +9,8 @@ export interface IEmployee {
   email: string
   password: string
   dtBirth: Date
-  entry: Date
-  exit: Date
+  entry: string
+  exit: string
   workingTime: number
   role: string
   companyCnpj?: string

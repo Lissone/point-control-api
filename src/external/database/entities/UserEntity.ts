@@ -7,7 +7,7 @@ export const UserEntity = new EntitySchema<IUser>({
   columns: {
     id: {
       type: String,
-      primary: true,
+      primary: true
     },
     name: {
       type: String,
@@ -24,12 +24,17 @@ export const UserEntity = new EntitySchema<IUser>({
     },
     role: {
       type: String,
-      nullable: false,
+      nullable: false
+    },
+    firstAccess: {
+      name: 'first_access',
+      type: Boolean,
+      nullable: false
     },
     companyCnpj: {
       name: 'company_cnpj',
       type: String,
-      nullable: true,
+      nullable: true
     },
     createdAt: {
       name: 'created_at',
@@ -39,7 +44,7 @@ export const UserEntity = new EntitySchema<IUser>({
     updatedAt: {
       name: 'updated_at',
       type: 'datetime2',
-      updateDate: true,
+      updateDate: true
     }
   },
   relations: {

@@ -6,7 +6,9 @@ export enum UserRole {
 }
 
 export interface IUserRepository {
+  getAll() : Promise<IUser[]>
+  getOne(id: string) : Promise<IUser | undefined>
   getOneByEmail(email: string) : Promise<IUser | undefined>
-  register(user: IUser) : Promise<IUser>
+  create(user: IUser) : Promise<IUser>
   update(user: IUser) : Promise<IUser>
 }

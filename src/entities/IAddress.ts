@@ -1,4 +1,4 @@
-import { IEmployee } from "./IEmployee";
+import { IEmployee } from './IEmployee'
 
 export interface IAddress {
   id: number

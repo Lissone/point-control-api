@@ -23,4 +23,8 @@ export class CompanyRepository implements ICompanyRepository {
     const company = this.repository.create(dto)
     return await this.repository.save(company)
   }
+
+  async update (dto: ICompany) : Promise<ICompany> {
+    return await this.repository.save(dto)
+  }
 }
