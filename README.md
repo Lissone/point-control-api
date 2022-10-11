@@ -93,6 +93,7 @@ const connection = createConnection({
 ```
 
 Need create first global admin user:
+
 Default password: 123
 
 ```sql
