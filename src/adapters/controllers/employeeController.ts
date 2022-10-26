@@ -1,6 +1,11 @@
 import { Request, Response } from 'express'
 import bcrypt from 'bcryptjs'
 
+import { mail } from '@external/mailer'
+import { createdUserAccountTemplateMessage } from '@external/mailer/templates'
+
+import { generatePassword } from '@shared/utils'
+
 import { IEmployeeRepository } from '@interfaces/employee'
 import { IUserRepository, UserRole } from '@interfaces/user'
 
@@ -81,9 +86,16 @@ export class EmployeeController {
       }
 
       delete req.body.userDecoded
-      const defaultPassword = '123'
-      const passwordHashed = await bcrypt.hash(defaultPassword, 5)
+      const generatedPassword = generatePassword()
+      const passwordHashed = await bcrypt.hash(generatedPassword, 5)
+
       employee = await this.employeeRepository.create({ password: passwordHashed, ...req.body })
+
+      await mail.send({
+        to: employee.email,
+        subject: 'PointControl - Usuário cadastrado',
+        text: createdUserAccountTemplateMessage(employee, generatedPassword)
+      })
 
       res.status(201).json({ user: employee })
     } catch (err) {
@@ -118,7 +130,6 @@ export class EmployeeController {
 
       res.status(200).json(employee)
     } catch (err) {
-      console.log(err)
       res.status(500).json({ message: err.message })
     }
   }

@@ -1,10 +1,10 @@
-import { getRepository, Repository } from "typeorm"
-import { v4 as uuidv4 } from "uuid"
+import { getRepository, Repository } from 'typeorm'
+import { v4 as uuidv4 } from 'uuid'
 
-import { UserEntity } from "@external/database/entities/UserEntity"
+import { UserEntity } from '@external/database/entities/UserEntity'
 
 import { IUser } from '@entities/IUser'
-import { IUserRepository } from "@interfaces/user"
+import { IUserRepository } from '@interfaces/user'
 
 export class UserRepository implements IUserRepository {
   private get repository () : Repository<IUser> {

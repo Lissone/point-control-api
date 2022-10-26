@@ -5,6 +5,15 @@ export enum UserRole {
   Client = 'client'
 }
 
+export interface ResetPasswordInfo {
+  user: {
+    email: string
+    type: 'user' | 'employee'
+  }
+  token: string
+  code: number
+}
+
 export interface IUserRepository {
   getAll() : Promise<IUser[]>
   getOne(id: string) : Promise<IUser | undefined>

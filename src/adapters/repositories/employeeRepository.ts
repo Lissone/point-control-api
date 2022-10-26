@@ -3,7 +3,7 @@ import { getRepository, Repository } from "typeorm"
 import { EmployeeEntity } from "@external/database/entities/EmployeeEntity"
 
 import { IEmployee } from "@entities/IEmployee"
-import { IEmployeeRepository } from "@interfaces/employee"
+import { IEmployeeRepository } from "src/interfaces/employee"
 
 export class EmployeeRepository implements IEmployeeRepository {
 
@@ -30,6 +30,12 @@ export class EmployeeRepository implements IEmployeeRepository {
     })
   }
 
+  async getOneByEmail (email: string) : Promise<IEmployee | undefined> {
+    return await this.repository.findOne({ 
+      where: { email },  
+      relations: ['company', 'address', 'absences', 'points'] 
+    })
+  }
 
   async create (dto: IEmployee) : Promise<IEmployee> {
     const employee = this.repository.create(dto)

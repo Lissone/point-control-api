@@ -1,5 +1,5 @@
 import 'reflect-metadata'
-import 'src/external/envConfig'
+import '@external/envConfig'
 
 import { app } from './app'
 

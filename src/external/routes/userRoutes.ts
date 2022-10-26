@@ -16,6 +16,11 @@ const userController = new UserController(userRepository, employeeRepository)
 
 userRoutes.post('/login', (req, res) => userController.loginEmployee(req, res))
 userRoutes.post('/login/admin', (req, res) => userController.loginAdmin(req, res))
+userRoutes.post('/reset/password', (req, res) => userController.resetPasswordEmployee(req, res))
+userRoutes.post('/reset/password/admin', (req, res) => userController.resetPasswordAdmin(req, res))
+userRoutes.get('/validate/token/:token', (req, res) => userController.validateResetPasswordToken(req, res))
+userRoutes.post('/validate/identity', (req, res) => userController.validateResetPasswordCode(req, res))
+
 
 userRoutes.get('/', AuthMiddleware, (req, res) => userController.getAll(req, res))
 userRoutes.get('/recover', AuthMiddleware, (req, res) => userController.recoverInformation(req, res))

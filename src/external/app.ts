@@ -3,7 +3,7 @@ import cors from 'cors'
 import swaggerUi from 'swagger-ui-express'
 
 import * as swaggerDocument from '../swagger.json'
-import { apiRoutes } from 'src/external/routes'
+import { apiRoutes } from '@external/routes'
 
 const app = express()
 
