@@ -1,5 +1,7 @@
 import { Request, Response } from 'express'
 
+import { MSG } from '@shared/msg'
+
 import { IPointRepository } from '@interfaces/point'
 import { IUserRepository } from '@interfaces/user'
 
@@ -24,12 +26,12 @@ export class PointController {
         ? this.pointRepository.findByCreatedAtWithCompanyCnpj(formattedCreatedAt, user.companyCnpj)
         : this.pointRepository.findByCreatedAt(formattedCreatedAt))
       if (!points) {
-        return res.status(404).json({ message: 'Points not found' })
+        return res.status(404).json({ error: MSG.POINT_NOT_FOUND })
       }
 
       return res.status(200).json(points)
     } catch (err) {
-      return res.status(500).json({ message: err.message })
+      return res.status(500).json({ error: err.message })
     }
   }
 
@@ -39,12 +41,12 @@ export class PointController {
 
       const points = await this.pointRepository.findByEmployeeCpf(cpf)
       if (!points) {
-        return res.status(404).json({ message: 'Points not found' })
+        return res.status(404).json({ error: MSG.POINT_NOT_FOUND })
       }
 
       return res.status(200).json(points)
     } catch (err) {
-      return res.status(500).json({ message: err.message })
+      return res.status(500).json({ error: err.message })
     }
   }
 
@@ -53,7 +55,7 @@ export class PointController {
       const point = await this.pointRepository.create(req.body)
       res.status(201).json(point)
     } catch (err) {
-      res.status(500).json({ message: err.message })
+      res.status(500).json({ error: err.message })
     }
   }
 }

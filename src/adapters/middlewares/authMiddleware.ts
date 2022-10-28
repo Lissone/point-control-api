@@ -3,6 +3,8 @@ import jwt from 'jsonwebtoken'
 
 import { UserDecodedPayload } from '@entities/IUser'
 
+import { MSG } from '@shared/msg'
+
 export interface JwtPayload {
   name: string
   email: string
@@ -17,21 +19,21 @@ export const AuthMiddleware = (req: Request, res: Response, next: NextFunction) 
   const authHeader = req.headers.authorization
 
   if (!authHeader) {
-    return res.status(401).json({ error: 'No token provided' })
+    return res.status(401).json({ error: MSG.TOKEN_NOT_FOUND })
   }
 
   const parts = authHeader.split(' ')
   if (!(parts.length === 2)) {
-    return res.status(401).json({ error: 'Token error' })
+    return res.status(401).json({ error: MSG.TOKEN_INVALID })
   }
 
   const [scheme, token] = parts
   if (!/^Bearer$/i.test(scheme)) {
-    return res.status(401).json({ error: 'Token malformed' })
+    return res.status(401).json({ error: MSG.TOKEN_MALFORMED })
   }
 
   jwt.verify(token, secretKey, (err, decoded: UserDecodedPayload) => {
-    if (err) return res.status(401).json({ error: 'Token invalid' })
+    if (err) return res.status(401).json({ error: MSG.TOKEN_INVALID })
 
     req.body.userDecoded = {
       cpf: decoded?.cpf,

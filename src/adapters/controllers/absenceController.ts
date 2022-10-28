@@ -1,5 +1,7 @@
 import { Request, Response } from 'express'
 
+import { MSG } from '@shared/msg'
+
 import { IAbsenceRepository } from '@interfaces/absence'
 import { IEmployeeRepository } from '@interfaces/employee'
 import { IUserRepository } from '@interfaces/user'
@@ -29,12 +31,12 @@ export class AbsenceController {
         : this.absenceRepository.getAll())
 
       if (!absences) {
-        return res.status(404).json({ message: 'Absences not found' })
+        return res.status(404).json({ error: MSG.ASBENCE_NOT_FOUND })
       }
 
       return res.status(200).json(absences)
     } catch (err) {
-      return res.status(500).json({ message: err.message })
+      return res.status(500).json({ error: err.message })
     }
   }
 
@@ -44,12 +46,12 @@ export class AbsenceController {
 
       const absences = await this.absenceRepository.findByStatus(Number(status))
       if (!absences) {
-        return res.status(404).json({ message: 'Absences not found' })
+        return res.status(404).json({ error: MSG.ASBENCE_NOT_FOUND })
       }
 
       return res.status(200).json(absences)
     } catch (err) {
-      return res.status(500).json({ message: err.message })
+      return res.status(500).json({ error: err.message })
     }
   }
 
@@ -59,12 +61,12 @@ export class AbsenceController {
 
       const absence = await this.absenceRepository.getOne(Number(id))
       if (!absence) {
-        return res.status(404).json({ message: 'Absence not found' })
+        return res.status(404).json({ error: MSG.ASBENCE_NOT_FOUND })
       }
 
       return res.status(200).json(absence)
     } catch (err) {
-      return res.status(500).json({ message: err.message })
+      return res.status(500).json({ error: err.message })
     }
   }
 
@@ -74,13 +76,13 @@ export class AbsenceController {
 
       const employee = await this.employeeRepository.getOne(employeeCpf)
       if (!employee) {
-        return res.status(404).json({ message: 'Employee not found' })
+        return res.status(404).json({ error: MSG.EMPLOYEE_NOT_FOUND })
       }
 
       const absence = await this.absenceRepository.create(req.body)
       return res.status(201).json(absence)
     } catch (err) {
-      return res.status(500).json({ message: err.message })
+      return res.status(500).json({ error: err.message })
     }
   }
 
@@ -90,7 +92,7 @@ export class AbsenceController {
 
       const absence = await this.absenceRepository.getOne(Number(id))
       if (!absence) {
-        return res.status(404).json({ message: 'Absence not found' })
+        return res.status(404).json({ error: MSG.EMPLOYEE_NOT_FOUND })
       }
 
       delete req.body.userDecoded
@@ -101,7 +103,7 @@ export class AbsenceController {
 
       return res.status(200).json(ret)
     } catch (err) {
-      return res.status(500).json({ message: err.message })
+      return res.status(500).json({ error: err.message })
     }
   }
 
@@ -111,13 +113,13 @@ export class AbsenceController {
 
       const absence = await this.absenceRepository.getOne(Number(id))
       if (!absence) {
-        return res.status(404).json({ message: 'Absence not found' })
+        return res.status(404).json({ error: MSG.EMPLOYEE_NOT_FOUND })
       }
 
       await this.absenceRepository.delete(Number(id))
       return res.sendStatus(200)
     } catch (err) {
-      return res.status(500).json({ message: err.message })
+      return res.status(500).json({ error: err.message })
     }
   }
 }

@@ -4,6 +4,7 @@ import { Request, Response } from 'express'
 import { mail } from '@external/mailer'
 import { createdUserAccountTemplateMessage } from '@external/mailer/templates'
 
+import { MSG } from '@shared/msg'
 import { generatePassword } from '@shared/utils'
 
 import { IEmployeeRepository } from '@interfaces/employee'
@@ -28,12 +29,12 @@ export class EmployeeController {
         : this.employeeRepository.getAll())
 
       if (!employees) {
-        return res.status(404).json({ message: 'Employees not found' })
+        return res.status(404).json({ error: MSG.EMPLOYEE_NOT_FOUND })
       }
 
       return res.status(200).json(employees)
     } catch (err) {
-      return res.status(500).json({ message: err.message })
+      return res.status(500).json({ error: err.message })
     }
   }
 
@@ -43,12 +44,12 @@ export class EmployeeController {
 
       const employees = await this.employeeRepository.findByCompanyCnpj(cnpj)
       if (!employees) {
-        return res.status(404).json({ message: 'Employees not found' })
+        return res.status(404).json({ error: MSG.EMPLOYEE_NOT_FOUND })
       }
 
       return res.status(200).json(employees)
     } catch (err) {
-      return res.status(500).json({ message: err.message })
+      return res.status(500).json({ error: err.message })
     }
   }
 
@@ -58,12 +59,12 @@ export class EmployeeController {
 
       const employee = await this.employeeRepository.getOne(cpf)
       if (!employee) {
-        return res.status(404).json({ message: 'Employee not found' })
+        return res.status(404).json({ error: MSG.EMPLOYEE_NOT_FOUND })
       }
 
       return res.status(200).json(employee)
     } catch (err) {
-      return res.status(500).json({ message: err.message })
+      return res.status(500).json({ error: err.message })
     }
   }
 
@@ -71,12 +72,12 @@ export class EmployeeController {
     try {
       const { userDecoded, cpf } = req.body
       if (userDecoded.role === UserRole.Client) {
-        return res.status(401).json({ message: 'You do not have permission to perform this action' })
+        return res.status(401).json({ error: MSG.NO_PERMISSION })
       }
 
       let employee = await this.employeeRepository.getOne(cpf)
       if (employee) {
-        return res.status(409).json({ message: 'Employee already exists' })
+        return res.status(409).json({ error: MSG.EMPLOYEE_ALREADY_EXISTS })
       }
 
       delete req.body.userDecoded
@@ -93,7 +94,7 @@ export class EmployeeController {
 
       return res.status(201).json({ user: employee })
     } catch (err) {
-      return res.status(500).json({ message: err.message })
+      return res.status(500).json({ error: err.message })
     }
   }
 
@@ -102,12 +103,12 @@ export class EmployeeController {
       const { cpf } = req.params
       const { userDecoded } = req.body
       if (userDecoded.role === UserRole.Client) {
-        return res.status(401).json({ message: 'You do not have permission to perform this action' })
+        return res.status(401).json({ error: MSG.NO_PERMISSION })
       }
 
       let employee = await this.employeeRepository.getOne(cpf)
       if (!employee) {
-        return res.status(404).json({ message: 'Employee not found' })
+        return res.status(404).json({ error: MSG.EMPLOYEE_NOT_FOUND })
       }
 
       let address = null
@@ -124,7 +125,7 @@ export class EmployeeController {
 
       return res.status(200).json(employee)
     } catch (err) {
-      return res.status(500).json({ message: err.message })
+      return res.status(500).json({ error: err.message })
     }
   }
 }

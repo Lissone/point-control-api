@@ -12,6 +12,7 @@ import { JwtPayload } from '@middlewares/authMiddleware'
 import { IEmployee } from '@entities/IEmployee'
 import { IUser } from '@entities/IUser'
 
+import { MSG } from '@shared/msg'
 import { generatePassword, generateRandomCodeNumber } from '@shared/utils'
 
 import { IEmployeeRepository } from '@interfaces/employee'
@@ -34,11 +35,11 @@ export class UserController {
 
       const employee = await this.employeeRepository.getOne(cpf)
       if (!employee) {
-        return res.status(404).json({ message: 'User not found' })
+        return res.status(404).json({ error: MSG.USER_NOT_FOUND })
       }
 
       if (!(await bcrypt.compare(password, employee.password))) {
-        return res.status(400).json({ message: 'Invalid password' })
+        return res.status(400).json({ error: MSG.USER_INVALID_PASSWORD })
       }
 
       const tokenExpires = 60 * 60 * 1 // 1 hour
@@ -57,7 +58,7 @@ export class UserController {
 
       return res.status(200).json({ user: employee, token, tokenExpires })
     } catch (err) {
-      return res.status(500).json({ message: err.message })
+      return res.status(500).json({ error: err.message })
     }
   }
 
@@ -67,11 +68,11 @@ export class UserController {
 
       const user = await this.userRepository.getOneByEmail(email)
       if (!user) {
-        return res.status(404).json({ message: 'User not found' })
+        return res.status(404).json({ error: MSG.USER_NOT_FOUND })
       }
 
       if (!(await bcrypt.compare(password, user.password))) {
-        return res.status(400).json({ message: 'Invalid password' })
+        return res.status(400).json({ error: MSG.USER_INVALID_PASSWORD })
       }
 
       const tokenExpires = 60 * 60 * 1 // 1 hour
@@ -89,7 +90,7 @@ export class UserController {
 
       return res.status(200).json({ user, token, tokenExpires })
     } catch (err) {
-      return res.status(500).json({ message: err.message })
+      return res.status(500).json({ error: err.message })
     }
   }
 
@@ -99,10 +100,10 @@ export class UserController {
 
       const employee = await this.employeeRepository.getOne(cpf)
       if (!employee) {
-        return res.status(404).json({ message: 'User not found' })
+        return res.status(404).json({ error: MSG.USER_NOT_FOUND })
       }
       if (employee.email !== email) {
-        return res.status(400).json({ message: 'E-mail inválido' })
+        return res.status(400).json({ error: MSG.USER_INVALID_EMAIL })
       }
 
       const cacheKey = 'forgot-password'
@@ -133,7 +134,7 @@ export class UserController {
 
       return res.status(200).json({ token })
     } catch (err) {
-      return res.status(500).json({ message: err.message })
+      return res.status(500).json({ error: err.message })
     }
   }
 
@@ -143,10 +144,10 @@ export class UserController {
 
       const user = await this.userRepository.getOneByEmail(email)
       if (!user) {
-        return res.status(404).json({ message: 'User not found' })
+        return res.status(404).json({ error: MSG.USER_NOT_FOUND })
       }
       if (user.name !== name) {
-        return res.status(400).json({ message: 'Nome inválido' })
+        return res.status(400).json({ error: MSG.USER_INVALID_NAME })
       }
 
       const cacheKey = 'forgot-password'
@@ -177,7 +178,7 @@ export class UserController {
 
       return res.status(200).json({ token })
     } catch (err) {
-      return res.status(500).json({ message: err.message })
+      return res.status(500).json({ error: err.message })
     }
   }
 
@@ -188,12 +189,12 @@ export class UserController {
       const cacheKey = 'forgot-password'
       const cachedToken = await cache.get<ResetPasswordInfo>(`${cacheKey}:${token}`)
       if (!cachedToken) {
-        return res.status(404).json({ message: 'Código expirado!' })
+        return res.status(404).json({ error: MSG.USER_RESET_PASSWORD_EXPIRED_TOKEN })
       }
 
       return res.sendStatus(200)
     } catch (err) {
-      return res.status(500).json({ message: err.message })
+      return res.status(500).json({ error: err.message })
     }
   }
 
@@ -204,11 +205,11 @@ export class UserController {
       const cacheKey = 'forgot-password'
       const cachedToken = await cache.get<ResetPasswordInfo>(`${cacheKey}:${token}`)
       if (!cachedToken) {
-        return res.status(404).json({ message: 'Código expirado!' })
+        return res.status(404).json({ error: MSG.USER_RESET_PASSWORD_INVALID_TOKEN })
       }
 
       if (cachedToken.code !== Number(code)) {
-        return res.status(400).json({ message: 'Código inválido' })
+        return res.status(400).json({ error: MSG.USER_RESET_PASSWORD_INVALID_TOKEN })
       }
 
       let user: IUser | IEmployee
@@ -227,7 +228,7 @@ export class UserController {
       }
 
       if (!user) {
-        return res.status(404).json({ message: 'User not found' })
+        return res.status(404).json({ error: MSG.USER_NOT_FOUND })
       }
 
       // cria auth jwt token pra enviar usuário logado
@@ -241,7 +242,7 @@ export class UserController {
 
       return res.status(200).json({ user, token: jwtToken, tokenExpires })
     } catch (err) {
-      return res.status(500).json({ message: err.message })
+      return res.status(500).json({ error: err.message })
     }
   }
 
@@ -249,15 +250,13 @@ export class UserController {
     try {
       const { userDecoded } = req.body
       if (userDecoded.role !== UserRole.GlobalAdmin) {
-        return res.status(401).json({
-          message: 'You do not have permission to perform this action'
-        })
+        return res.status(401).json({ error: MSG.NO_PERMISSION })
       }
 
       const users = await this.userRepository.getAll()
       return res.status(200).json(users)
     } catch (err) {
-      return res.status(500).json({ message: err.message })
+      return res.status(500).json({ error: err.message })
     }
   }
 
@@ -266,19 +265,17 @@ export class UserController {
       const { email } = req.params
       const { userDecoded } = req.body
       if (userDecoded.role !== UserRole.GlobalAdmin) {
-        return res.status(401).json({
-          message: 'You do not have permission to perform this action'
-        })
+        return res.status(401).json({ error: MSG.NO_PERMISSION })
       }
 
       const user = await this.userRepository.getOneByEmail(email)
       if (!user) {
-        return res.status(404).json({ message: 'User not found' })
+        return res.status(404).json({ error: MSG.USER_NOT_FOUND })
       }
 
       return res.status(200).json(user)
     } catch (err) {
-      return res.status(500).json({ message: err.message })
+      return res.status(500).json({ error: err.message })
     }
   }
 
@@ -290,12 +287,12 @@ export class UserController {
         ? await this.employeeRepository.getOne(userDecoded.cpf)
         : await this.userRepository.getOneByEmail(userDecoded.email)
       if (!user) {
-        return res.status(404).json({ message: 'User not found' })
+        return res.status(404).json({ error: MSG.USER_NOT_FOUND })
       }
 
       return res.status(200).json({ user })
     } catch (err) {
-      return res.status(500).json({ message: err.message })
+      return res.status(500).json({ error: err.message })
     }
   }
 
@@ -303,14 +300,12 @@ export class UserController {
     try {
       const { userDecoded, email } = req.body
       if (userDecoded.role !== UserRole.GlobalAdmin) {
-        return res.status(401).json({
-          message: 'You do not have permission to perform this action'
-        })
+        return res.status(401).json({ error: MSG.NO_PERMISSION })
       }
 
       let user = await this.userRepository.getOneByEmail(email)
       if (user?.email === email) {
-        return res.status(409).json({ message: 'User already exists' })
+        return res.status(409).json({ error: MSG.COMPANY_ALREADY_EXISTS })
       }
 
       delete req.body.userDecoded
@@ -330,7 +325,7 @@ export class UserController {
 
       return res.status(201).json({ user })
     } catch (err) {
-      return res.status(500).json({ message: err.message })
+      return res.status(500).json({ error: err.message })
     }
   }
 
@@ -340,7 +335,7 @@ export class UserController {
 
       let user = await this.userRepository.getOneByEmail(userDecoded.email)
       if (!user) {
-        return res.status(404).json({ message: 'User not found' })
+        return res.status(404).json({ error: MSG.USER_NOT_FOUND })
       }
 
       const newPasswordHashed = await bcrypt.hash(newPassword, 5)
@@ -352,7 +347,7 @@ export class UserController {
 
       return res.status(200).json(user)
     } catch (err) {
-      return res.status(500).json({ message: err.message })
+      return res.status(500).json({ error: err.message })
     }
   }
 
@@ -362,7 +357,7 @@ export class UserController {
 
       let employee = await this.employeeRepository.getOne(userDecoded.cpf)
       if (!employee) {
-        return res.status(404).json({ message: 'User not found' })
+        return res.status(404).json({ error: MSG.USER_NOT_FOUND })
       }
 
       const newPasswordHashed = await bcrypt.hash(newPassword, 5)
@@ -373,7 +368,7 @@ export class UserController {
 
       return res.status(200).json(employee)
     } catch (err) {
-      return res.status(500).json({ message: err.message })
+      return res.status(500).json({ error: err.message })
     }
   }
 
@@ -382,14 +377,12 @@ export class UserController {
       const { id } = req.params
       const { userDecoded } = req.body
       if (userDecoded.role !== UserRole.GlobalAdmin) {
-        return res.status(401).json({
-          message: 'You do not have permission to perform this action'
-        })
+        return res.status(401).json({ error: MSG.NO_PERMISSION })
       }
 
       let user = await this.userRepository.getOne(id)
       if (!user) {
-        return res.status(404).json({ message: 'User not found' })
+        return res.status(404).json({ error: MSG.USER_NOT_FOUND })
       }
 
       delete req.body.userDecoded
@@ -397,7 +390,7 @@ export class UserController {
 
       return res.status(200).json(user)
     } catch (err) {
-      return res.status(500).json({ message: err.message })
+      return res.status(500).json({ error: err.message })
     }
   }
 }
