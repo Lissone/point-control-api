@@ -1,11 +1,11 @@
 import { createConnection } from 'typeorm'
 
-import { UserEntity } from './entities/UserEntity'
+import { AbsenceEntity } from './entities/AbsenceEntity'
+import { AddressEntity } from './entities/AddressEntity'
 import { CompanyEntity } from './entities/CompanyEntity'
 import { EmployeeEntity } from './entities/EmployeeEntity'
-import { AddressEntity } from './entities/AddressEntity'
-import { AbsenceEntity } from './entities/AbsenceEntity'
 import { PointEntity } from './entities/PointEntity'
+import { UserEntity } from './entities/UserEntity'
 
 const connection = createConnection({
   type: 'mssql',

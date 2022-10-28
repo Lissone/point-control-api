@@ -1,6 +1,6 @@
-import { IUser } from '@entities/IUser'
-
 import { EntitySchema } from 'typeorm'
+
+import { IUser } from '@entities/IUser'
 
 export const UserEntity = new EntitySchema<IUser>({
   name: 'user',
@@ -50,9 +50,9 @@ export const UserEntity = new EntitySchema<IUser>({
   relations: {
     company: {
       type: 'many-to-one',
-      joinColumn: ({
+      joinColumn: {
         name: 'company_cnpj'
-      }),
+      },
       target: 'company',
       nullable: true
     }

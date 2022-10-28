@@ -1,5 +1,5 @@
-import jwt from 'jsonwebtoken'
 import { NextFunction, Request, Response } from 'express'
+import jwt from 'jsonwebtoken'
 
 import { UserDecodedPayload } from '@entities/IUser'
 
@@ -10,8 +10,9 @@ export interface JwtPayload {
   cpf?: string
 }
 
-const secretKey = process.env.SECRET_KEY
+const secretKey = process.env.SECRET_KEY || 'super_secret'
 
+// eslint-disable-next-line consistent-return
 export const AuthMiddleware = (req: Request, res: Response, next: NextFunction) => {
   const authHeader = req.headers.authorization
 
@@ -21,7 +22,7 @@ export const AuthMiddleware = (req: Request, res: Response, next: NextFunction) 
 
   const parts = authHeader.split(' ')
   if (!(parts.length === 2)) {
-    return res.status(401).json({ error: 'Token error' }) 
+    return res.status(401).json({ error: 'Token error' })
   }
 
   const [scheme, token] = parts
@@ -29,7 +30,7 @@ export const AuthMiddleware = (req: Request, res: Response, next: NextFunction) 
     return res.status(401).json({ error: 'Token malformed' })
   }
 
-  jwt.verify(token, secretKey!, (err, decoded: UserDecodedPayload) => {
+  jwt.verify(token, secretKey, (err, decoded: UserDecodedPayload) => {
     if (err) return res.status(401).json({ error: 'Token invalid' })
 
     req.body.userDecoded = {

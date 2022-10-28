@@ -5,12 +5,12 @@ import { IEmployeeRepository } from '@interfaces/employee'
 import { IUserRepository } from '@interfaces/user'
 
 export class AbsenceController {
-  absenceRepository: IAbsenceRepository
-  employeeRepository: IEmployeeRepository
-  userRepository: IUserRepository
+  private readonly absenceRepository: IAbsenceRepository
+  private readonly employeeRepository: IEmployeeRepository
+  private readonly userRepository: IUserRepository
 
-  constructor (
-    absenceRepository: IAbsenceRepository, 
+  constructor(
+    absenceRepository: IAbsenceRepository,
     employeeRepository: IEmployeeRepository,
     userRepository: IUserRepository
   ) {
@@ -19,28 +19,26 @@ export class AbsenceController {
     this.userRepository = userRepository
   }
 
-  async getAll (req: Request, res: Response) {
+  async getAll(req: Request, res: Response) {
     try {
       const { userDecoded } = req.body
-      
+
       const user = await this.userRepository.getOneByEmail(userDecoded.email)
-      const absences = await (
-        user.companyCnpj 
+      const absences = await (user.companyCnpj
         ? this.absenceRepository.findByCompanyCnpj(user.companyCnpj)
-        : this.absenceRepository.getAll()
-      )
+        : this.absenceRepository.getAll())
 
       if (!absences) {
         return res.status(404).json({ message: 'Absences not found' })
       }
 
-      res.status(200).json(absences)
+      return res.status(200).json(absences)
     } catch (err) {
-      res.status(500).json({ message: err.message })
+      return res.status(500).json({ message: err.message })
     }
   }
 
-  async findByStatus (req: Request, res: Response) {
+  async findByStatus(req: Request, res: Response) {
     try {
       const { status } = req.params
 
@@ -49,13 +47,13 @@ export class AbsenceController {
         return res.status(404).json({ message: 'Absences not found' })
       }
 
-      res.status(200).json(absences)
+      return res.status(200).json(absences)
     } catch (err) {
-      res.status(500).json({ message: err.message })
+      return res.status(500).json({ message: err.message })
     }
   }
 
-  async getOne (req: Request, res: Response) {
+  async getOne(req: Request, res: Response) {
     try {
       const { id } = req.params
 
@@ -64,13 +62,13 @@ export class AbsenceController {
         return res.status(404).json({ message: 'Absence not found' })
       }
 
-      res.status(200).json(absence)
+      return res.status(200).json(absence)
     } catch (err) {
-      res.status(500).json({ message: err.message })
+      return res.status(500).json({ message: err.message })
     }
   }
 
-  async create (req: Request, res: Response) {
+  async create(req: Request, res: Response) {
     try {
       const { employeeCpf } = req.body
 
@@ -80,14 +78,13 @@ export class AbsenceController {
       }
 
       const absence = await this.absenceRepository.create(req.body)
-
-      res.status(201).json(absence)
+      return res.status(201).json(absence)
     } catch (err) {
-      res.status(500).json({ message: err.message })
+      return res.status(500).json({ message: err.message })
     }
   }
 
-  async update (req: Request, res: Response) {
+  async update(req: Request, res: Response) {
     try {
       const { id } = req.params
 
@@ -97,15 +94,18 @@ export class AbsenceController {
       }
 
       delete req.body.userDecoded
-      const ret = await this.absenceRepository.update({...absence, ...req.body})
+      const ret = await this.absenceRepository.update({
+        ...absence,
+        ...req.body
+      })
 
-      res.status(200).json(ret)
+      return res.status(200).json(ret)
     } catch (err) {
-      res.status(500).json({ message: err.message })
+      return res.status(500).json({ message: err.message })
     }
   }
 
-  async delete (req: Request, res: Response) {
+  async delete(req: Request, res: Response) {
     try {
       const { id } = req.params
 
@@ -115,11 +115,9 @@ export class AbsenceController {
       }
 
       await this.absenceRepository.delete(Number(id))
-      
-      res.sendStatus(200)
+      return res.sendStatus(200)
     } catch (err) {
-      res.status(500).json({ message: err.message })
+      return res.status(500).json({ message: err.message })
     }
   }
 }
-

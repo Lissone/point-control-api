@@ -16,8 +16,8 @@ export interface IUser {
 }
 
 export interface UserDecodedPayload extends JwtPayload {
-  cpf: string | null,
-  name: string,
-  email: string,
-  role: string,
+  cpf: string | null
+  name: string
+  email: string
+  role: string
 }

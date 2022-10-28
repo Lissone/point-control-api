@@ -15,9 +15,9 @@ export interface ResetPasswordInfo {
 }
 
 export interface IUserRepository {
-  getAll() : Promise<IUser[]>
-  getOne(id: string) : Promise<IUser | undefined>
-  getOneByEmail(email: string) : Promise<IUser | undefined>
-  create(user: IUser) : Promise<IUser>
-  update(user: IUser) : Promise<IUser>
+  getAll(): Promise<IUser[]>
+  getOne(id: string): Promise<IUser | undefined>
+  getOneByEmail(email: string): Promise<IUser | undefined>
+  create(user: IUser): Promise<IUser>
+  update(user: IUser): Promise<IUser>
 }

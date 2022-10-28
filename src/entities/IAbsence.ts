@@ -1,6 +1,6 @@
-import { AbsenceStatus } from '@interfaces/absence'
-
 import { IEmployee } from './IEmployee'
+
+import { AbsenceStatus } from '@interfaces/absence'
 
 export interface IAbsence {
   id: number

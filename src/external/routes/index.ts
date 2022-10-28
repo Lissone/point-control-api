@@ -1,10 +1,10 @@
 import { Router } from 'express'
 
-import { userRoutes } from './userRoutes'
+import { absenceRoutes } from './absenceRoutes'
 import { companyRoutes } from './companyRoutes'
 import { employeeRoutes } from './employeeRoutes'
-import { absenceRoutes } from './absenceRoutes'
 import { pointRoutes } from './pointRoutes'
+import { userRoutes } from './userRoutes'
 
 export const apiRoutes = Router()
 

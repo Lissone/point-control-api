@@ -2,7 +2,7 @@ import Redis from 'ioredis'
 
 class Cache {
   private readonly redis: Redis
-  
+
   constructor() {
     this.redis = new Redis({
       host: process.env.REDIS_HOST || 'localhost',

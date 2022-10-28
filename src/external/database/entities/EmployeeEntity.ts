@@ -1,6 +1,6 @@
-import { IEmployee } from '@entities/IEmployee'
-
 import { EntitySchema } from 'typeorm'
+
+import { IEmployee } from '@entities/IEmployee'
 
 export const EmployeeEntity = new EntitySchema<IEmployee>({
   name: 'employee',
@@ -62,9 +62,9 @@ export const EmployeeEntity = new EntitySchema<IEmployee>({
   relations: {
     company: {
       type: 'many-to-one',
-      joinColumn: ({
+      joinColumn: {
         name: 'company_cnpj'
-      }),
+      },
       target: 'company',
       nullable: true
     },

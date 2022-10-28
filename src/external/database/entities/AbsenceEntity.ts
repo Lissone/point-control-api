@@ -49,15 +49,15 @@ export const AbsenceEntity = new EntitySchema<IAbsence>({
     updatedAt: {
       name: 'updated_at',
       type: 'datetime2',
-      updateDate: true,
+      updateDate: true
     }
   },
   relations: {
     employee: {
       type: 'many-to-one',
-      joinColumn: ({
+      joinColumn: {
         name: 'employee_cpf'
-      }),
+      },
       target: 'employee',
       nullable: false
     }

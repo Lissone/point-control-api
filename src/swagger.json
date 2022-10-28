@@ -1,41 +1,41 @@
 {
-	"swagger": "2.0",
-	"info": {
-		"version": " 1.1.1",
-		"title": "PointControl - Api",
-		"description": "This is an API to save and track working hours records by employees of a company",
-		"author": "Leonardo Dias Lissone Santomero",
-		"Site Funcionários": "http://pointcontrol.com.br/",
+  "swagger": "2.0",
+  "info": {
+    "version": " 1.1.1",
+    "title": "PointControl - Api",
+    "description": "This is an API to save and track working hours records by employees of a company",
+    "author": "Leonardo Dias Lissone Santomero",
+    "Site Funcionários": "http://pointcontrol.com.br/",
     "Site Admins": "http://pointcontrol-admin.com.br/",
-		"termsOfService": "http://swagger.io/terms/",
-		"contact": {
-			"email": "leonardo.lissonez@gmail.com"
-		}
-	},
-	"host": "localhost:5000/api/",
-	"basePath": "v1",
-	"tags": [
+    "termsOfService": "http://swagger.io/terms/",
+    "contact": {
+      "email": "leonardo.lissonez@gmail.com"
+    }
+  },
+  "host": "localhost:5000/api/",
+  "basePath": "v1",
+  "tags": [
     {
-			"name": "User",
-			"description": "User in the point control microservice database"
-		},
+      "name": "User",
+      "description": "User in the point control microservice database"
+    },
     {
-			"name": "Company",
-			"description": "Company in the point control microservice database"
-		},
-		{
-			"name": "Employee",
-			"description": "Employee in the point control microservice database"
-		},
+      "name": "Company",
+      "description": "Company in the point control microservice database"
+    },
     {
-			"name": "Absence",
-			"description": "Absence in the point control microservice database"
-		},
+      "name": "Employee",
+      "description": "Employee in the point control microservice database"
+    },
     {
-			"name": "Point",
-			"description": "Point in the point control microservice database"
-		}
-	],
+      "name": "Absence",
+      "description": "Absence in the point control microservice database"
+    },
+    {
+      "name": "Point",
+      "description": "Point in the point control microservice database"
+    }
+  ],
   "securityDefinitions": {
     "bearerAuth": {
       "type": "apiKey",
@@ -48,40 +48,36 @@
       "bearerAuth": []
     }
   ],
-	"paths": {
+  "paths": {
     "/user/login": {
       "post": {
-				"tags": [
-					"User"
-				],
-				"summary": "Employee log in and verify exists",
-				"produces": [
-					"application/json"
-				],
+        "tags": ["User"],
+        "summary": "Employee log in and verify exists",
+        "produces": ["application/json"],
         "parameters": [
           {
-						"name": "user",
-						"in": "body",
-						"required": true,
-						"description": "Employee user sign in data",
-						"schema": {
-							"type": "object",
-							"properties": {
-								"cpf": {
-									"type": "string"
-								},
-								"password": {
-									"type": "string"
-								}
-							}
-						}
-					}
-				],
-				"responses": {
-					"200": {
-						"description": "Ok",
+            "name": "user",
+            "in": "body",
+            "required": true,
+            "description": "Employee user sign in data",
             "schema": {
-							"type": "object",
+              "type": "object",
+              "properties": {
+                "cpf": {
+                  "type": "string"
+                },
+                "password": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "schema": {
+              "type": "object",
               "properties": {
                 "user": {
                   "$ref": "#/definitions/Employee"
@@ -89,60 +85,56 @@
                 "token": {
                   "type": "string"
                 },
-								"tokenExpires": {
-									"type": "number"
-								}
+                "tokenExpires": {
+                  "type": "number"
+                }
               }
-						}
-					},
+            }
+          },
           "401": {
-						"description": "Unauthorized"
-					},
+            "description": "Unauthorized"
+          },
           "400": {
-						"description": "Bad request"
-					},
+            "description": "Bad request"
+          },
           "404": {
-						"description": "Not found"
-					},
+            "description": "Not found"
+          },
           "500": {
             "description": "Internal Server Error"
           }
-				}
-			}
+        }
+      }
     },
     "/user/login/admin": {
       "post": {
-				"tags": [
-					"User"
-				],
-				"summary": "Admin user log in and verify exists",
-				"produces": [
-					"application/json"
-				],
+        "tags": ["User"],
+        "summary": "Admin user log in and verify exists",
+        "produces": ["application/json"],
         "parameters": [
           {
-						"name": "user",
-						"in": "body",
-						"required": true,
-						"description": "Admin user sign in data",
-						"schema": {
-							"type": "object",
-							"properties": {
-								"email": {
-									"type": "string"
-								},
-								"password": {
-									"type": "string"
-								}
-							}
-						}
-					}
-				],
-				"responses": {
-					"200": {
-						"description": "Ok",
+            "name": "user",
+            "in": "body",
+            "required": true,
+            "description": "Admin user sign in data",
             "schema": {
-							"type": "object",
+              "type": "object",
+              "properties": {
+                "email": {
+                  "type": "string"
+                },
+                "password": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "schema": {
+              "type": "object",
               "properties": {
                 "user": {
                   "$ref": "#/definitions/User"
@@ -150,26 +142,206 @@
                 "token": {
                   "type": "string"
                 },
-								"tokenExpires": {
-									"type": "number"
-								}
+                "tokenExpires": {
+                  "type": "number"
+                }
               }
-						}
-					},
+            }
+          },
           "401": {
-						"description": "Unauthorized"
-					},
+            "description": "Unauthorized"
+          },
           "400": {
-						"description": "Bad request"
-					},
+            "description": "Bad request"
+          },
           "404": {
-						"description": "Not found"
-					},
+            "description": "Not found"
+          },
           "500": {
             "description": "Internal Server Error"
           }
-				}
-			}
+        }
+      }
+    },
+    "/user/reset/password": {
+      "post": {
+        "tags": ["User"],
+        "summary": "Employee reset password",
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "cpf",
+            "in": "body",
+            "required": true,
+            "description": "Employee's identify document",
+            "type": "string"
+          },
+          {
+            "name": "email",
+            "in": "body",
+            "required": true,
+            "description": "E-mail",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "token": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/user/reset/password/admin": {
+      "post": {
+        "tags": ["User"],
+        "summary": "Admin user reset password",
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "name",
+            "in": "body",
+            "required": true,
+            "description": "Name",
+            "type": "string"
+          },
+          {
+            "name": "email",
+            "in": "body",
+            "required": true,
+            "description": "E-mail",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "token": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/user/validate/token/{token}": {
+      "get": {
+        "tags": ["User"],
+        "summary": "Validate password reset token",
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "token",
+            "in": "path",
+            "required": true,
+            "description": "Password reset token",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Ok"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/user/validate/identity": {
+      "post": {
+        "tags": ["User"],
+        "summary": "Validates the user's identity by the code sent by email",
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "token",
+            "in": "body",
+            "required": true,
+            "description": "Password reset token",
+            "type": "string"
+          },
+          {
+            "name": "code",
+            "in": "body",
+            "required": true,
+            "description": "Identity confirmation code",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "user": {
+                  "$ref": "#/definitions/User"
+                },
+                "token": {
+                  "type": "string"
+                },
+                "tokenExpires": {
+                  "type": "number"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
     },
     "/user/": {
       "get": {
@@ -178,32 +350,28 @@
             "bearerAuth": []
           }
         ],
-				"tags": [
-					"User"
-				],
-				"summary": "Get a list of all users directly in the database",
-				"produces": [
-					"application/json"
-				],
-				"responses": {
-					"200": {
-						"description": "Ok",
+        "tags": ["User"],
+        "summary": "Get a list of all users directly in the database",
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "Ok",
             "schema": {
               "type": "array",
               "items": {
                 "type": "object",
                 "$ref": "#/definitions/User"
               }
-						}
-					},
+            }
+          },
           "401": {
-						"description": "Unauthorized"
-					},
+            "description": "Unauthorized"
+          },
           "500": {
             "description": "Internal Server Error"
           }
-				}
-			}
+        }
+      }
     },
     "/user/{email}": {
       "get": {
@@ -212,13 +380,9 @@
             "bearerAuth": []
           }
         ],
-				"tags": [
-					"User"
-				],
-				"summary": "Get an user for your email directly from the database",
-				"produces": [
-					"application/json"
-				],
+        "tags": ["User"],
+        "summary": "Get an user for your email directly from the database",
+        "produces": ["application/json"],
         "parameters": [
           {
             "name": "email",
@@ -228,24 +392,24 @@
             "type": "string"
           }
         ],
-				"responses": {
-					"200": {
-						"description": "Ok",
+        "responses": {
+          "200": {
+            "description": "Ok",
             "schema": {
               "$ref": "#/definitions/Email"
-						}
-					},
+            }
+          },
           "401": {
-						"description": "Unauthorized"
-					},
-					"404": {
-						"description": "Not found"
-					},
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "Not found"
+          },
           "500": {
             "description": "Internal Server Error"
           }
-				}
-			}
+        }
+      }
     },
     "/user/{id}": {
       "post": {
@@ -254,14 +418,10 @@
             "bearerAuth": []
           }
         ],
-				"tags": [
-					"User"
-				],
-				"summary": "Register user in database",
-				"produces": [
-					"application/json"
-				],
-				"parameters": [
+        "tags": ["User"],
+        "summary": "Register user in database",
+        "produces": ["application/json"],
+        "parameters": [
           {
             "name": "id",
             "in": "path",
@@ -270,103 +430,95 @@
             "type": "string"
           },
           {
-						"name": "user",
-						"in": "body",
-						"required": true,
-						"description": "User sign up data",
-						"schema": {
-							"type": "object",
-							"properties": {
-								"name": {
-									"type": "string"
-								},
-								"email": {
-									"type": "string"
-								},
-								"role": {
-									"type": "string"
-								},
-                "companyCnpj": {
-									"type": "string"
-								}
-							}
-						}
-					}
-				],
-				"responses": {
-					"200": {
-						"description": "Ok",
+            "name": "user",
+            "in": "body",
+            "required": true,
+            "description": "User sign up data",
             "schema": {
-							"type": "object",
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string"
+                },
+                "email": {
+                  "type": "string"
+                },
+                "role": {
+                  "type": "string"
+                },
+                "companyCnpj": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "schema": {
+              "type": "object",
               "properties": {
                 "user": {
                   "$ref": "#/definitions/User"
                 }
               }
-						}
-					},
+            }
+          },
           "401": {
-						"description": "Unauthorized"
-					},
+            "description": "Unauthorized"
+          },
           "404": {
-						"description": "Not found"
-					},
+            "description": "Not found"
+          },
           "409": {
-						"description": "Already exists"
-					},
+            "description": "Already exists"
+          },
           "500": {
             "description": "Internal Server Error"
           }
-				}
-			}
+        }
+      }
     },
     "/user/recover": {
-			"get": {
+      "get": {
         "security": [
           {
             "bearerAuth": []
           }
         ],
-				"tags": [
-					"User"
-				],
-				"summary": "Recover user with token",
-				"produces": [
-					"application/json"
-				],
-				"responses": {
-					"200": {
-						"description": "Ok",
+        "tags": ["User"],
+        "summary": "Recover user with token",
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "Ok",
             "schema": {
-							"$ref": "#/definitions/User"
-						}
-					},
+              "$ref": "#/definitions/User"
+            }
+          },
           "401": {
-						"description": "Unauthorized"
-					},
+            "description": "Unauthorized"
+          },
           "404": {
-						"description": "Not found"
-					},
+            "description": "Not found"
+          },
           "500": {
             "description": "Internal Server Error"
           }
-				}
-			}
-		},
+        }
+      }
+    },
     "/change/password": {
-			"patch": {
+      "patch": {
         "security": [
           {
             "bearerAuth": []
           }
         ],
-				"tags": [
-					"User"
-				],
-				"summary": "Change user employee password",
-				"produces": [
-					"application/json"
-				],
+        "tags": ["User"],
+        "summary": "Change user employee password",
+        "produces": ["application/json"],
         "parameters": [
           {
             "name": "password",
@@ -374,41 +526,37 @@
             "required": true,
             "description": "New user employee password",
             "type": "string"
-					}
-				],
-				"responses": {
-					"200": {
-						"description": "Ok",
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Ok",
             "schema": {
-							"$ref": "#/definitions/Employee"
-						}
-					},
+              "$ref": "#/definitions/Employee"
+            }
+          },
           "401": {
-						"description": "Unauthorized"
-					},
+            "description": "Unauthorized"
+          },
           "404": {
-						"description": "Not found"
-					},
+            "description": "Not found"
+          },
           "500": {
             "description": "Internal Server Error"
           }
-				}
-			}
-		},
+        }
+      }
+    },
     "/change/password/admin": {
-			"patch": {
+      "patch": {
         "security": [
           {
             "bearerAuth": []
           }
         ],
-				"tags": [
-					"User"
-				],
-				"summary": "Change admin user password",
-				"produces": [
-					"application/json"
-				],
+        "tags": ["User"],
+        "summary": "Change admin user password",
+        "produces": ["application/json"],
         "parameters": [
           {
             "name": "password",
@@ -416,27 +564,27 @@
             "required": true,
             "description": "New user password",
             "type": "string"
-					}
-				],
-				"responses": {
-					"200": {
-						"description": "Ok",
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Ok",
             "schema": {
-							"$ref": "#/definitions/User"
-						}
-					},
+              "$ref": "#/definitions/User"
+            }
+          },
           "401": {
-						"description": "Unauthorized"
-					},
+            "description": "Unauthorized"
+          },
           "404": {
-						"description": "Not found"
-					},
+            "description": "Not found"
+          },
           "500": {
             "description": "Internal Server Error"
           }
-				}
-			}
-		},
+        }
+      }
+    },
     "/company/": {
       "get": {
         "security": [
@@ -444,32 +592,28 @@
             "bearerAuth": []
           }
         ],
-				"tags": [
-					"Company"
-				],
-				"summary": "Get a list of all companies directly in the database",
-				"produces": [
-					"application/json"
-				],
-				"responses": {
-					"200": {
-						"description": "Ok",
+        "tags": ["Company"],
+        "summary": "Get a list of all companies directly in the database",
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "Ok",
             "schema": {
               "type": "array",
               "items": {
                 "type": "object",
                 "$ref": "#/definitions/Company"
               }
-						}
-					},
+            }
+          },
           "401": {
-						"description": "Unauthorized"
-					},
+            "description": "Unauthorized"
+          },
           "500": {
             "description": "Internal Server Error"
           }
-				}
-			}
+        }
+      }
     },
     "/company/{cnpj}": {
       "get": {
@@ -478,13 +622,9 @@
             "bearerAuth": []
           }
         ],
-				"tags": [
-					"Company"
-				],
-				"summary": "Get an company for your cnpj directly from the database",
-				"produces": [
-					"application/json"
-				],
+        "tags": ["Company"],
+        "summary": "Get an company for your cnpj directly from the database",
+        "produces": ["application/json"],
         "parameters": [
           {
             "name": "cnpj",
@@ -494,51 +634,45 @@
             "type": "string"
           }
         ],
-				"responses": {
-					"200": {
-						"description": "Ok",
+        "responses": {
+          "200": {
+            "description": "Ok",
             "schema": {
               "$ref": "#/definitions/Company"
-						}
-					},
+            }
+          },
           "401": {
-						"description": "Unauthorized"
-					},
-					"404": {
-						"description": "Not found"
-					},
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "Not found"
+          },
           "500": {
             "description": "Internal Server Error"
           }
-				}
-			}
+        }
+      }
     },
     "/company": {
-			"post": {
+      "post": {
         "security": [
           {
             "bearerAuth": []
           }
         ],
-				"tags": [
-					"Company"
-				],
-				"summary": "Insert a new company in the database",
-				"consumes": [
-					"application/json"
-				],
-				"produces": [
-					"application/json"
-				],
-				"parameters": [
+        "tags": ["Company"],
+        "summary": "Insert a new company in the database",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [
           {
-						"name": "company",
-						"in": "body",
-						"required": true,
-						"description": "Company entity in the db",
-						"schema": {
-							"type": "object",
-							"properties": {
+            "name": "company",
+            "in": "body",
+            "required": true,
+            "description": "Company entity in the db",
+            "schema": {
+              "type": "object",
+              "properties": {
                 "cnpj": {
                   "type": "string"
                 },
@@ -546,28 +680,28 @@
                   "type": "string"
                 }
               }
-						}
-					}
-				],
-				"responses": {
-					"201": {
-						"description": "Created",
-						"schema": {
-							"$ref": "#/definitions/Company"
-						}
-					},
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/Company"
+            }
+          },
           "401": {
-						"description": "Unauthorized"
-					},
+            "description": "Unauthorized"
+          },
           "409": {
-						"description": "Already exists"
-					},
-					"500": {
-						"description": "Company already exists"
-					}
-				}
-			}
-		},
+            "description": "Already exists"
+          },
+          "500": {
+            "description": "Company already exists"
+          }
+        }
+      }
+    },
     "/company/{cnpj}/": {
       "put": {
         "security": [
@@ -575,14 +709,10 @@
             "bearerAuth": []
           }
         ],
-				"tags": [
-					"Company"
-				],
-				"summary": "Register company in database",
-				"produces": [
-					"application/json"
-				],
-				"parameters": [
+        "tags": ["Company"],
+        "summary": "Register company in database",
+        "produces": ["application/json"],
+        "parameters": [
           {
             "name": "cnpj",
             "in": "path",
@@ -591,98 +721,90 @@
             "type": "string"
           },
           {
-						"name": "company",
-						"in": "body",
-						"required": true,
-						"description": "Company entity in the db",
-						"schema": {
-							"type": "object",
-							"properties": {
+            "name": "company",
+            "in": "body",
+            "required": true,
+            "description": "Company entity in the db",
+            "schema": {
+              "type": "object",
+              "properties": {
                 "name": {
                   "type": "string"
                 }
               }
-						}
-					}
-				],
-				"responses": {
-					"200": {
-						"description": "Ok",
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Ok",
             "schema": {
-							"type": "object",
+              "type": "object",
               "properties": {
                 "user": {
                   "$ref": "#/definitions/Company"
                 }
               }
-						}
-					},
+            }
+          },
           "401": {
-						"description": "Unauthorized"
-					},
+            "description": "Unauthorized"
+          },
           "404": {
-						"description": "Not found"
-					},
+            "description": "Not found"
+          },
           "409": {
-						"description": "Already exists"
-					},
+            "description": "Already exists"
+          },
           "500": {
             "description": "Internal Server Error"
           }
-				}
-			}
+        }
+      }
     },
-		"/employee/": {
-			"get": {
+    "/employee/": {
+      "get": {
         "security": [
           {
             "bearerAuth": []
           }
         ],
-				"tags": [
-					"Employee"
-				],
-				"summary": "Get a list of all employees directly in the database",
-				"produces": [
-					"application/json"
-				],
-				"responses": {
-					"200": {
-						"description": "Ok",
+        "tags": ["Employee"],
+        "summary": "Get a list of all employees directly in the database",
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "Ok",
             "schema": {
               "type": "array",
               "items": {
                 "type": "object",
                 "$ref": "#/definitions/Employee"
               }
-						}
-					},
+            }
+          },
           "401": {
-						"description": "Unauthorized"
-					},
+            "description": "Unauthorized"
+          },
           "404": {
-						"description": "Not found"
-					},
+            "description": "Not found"
+          },
           "500": {
             "description": "Internal Server Error"
           }
-				}
-			}
-		},
+        }
+      }
+    },
     "/employee/{cpf}": {
-			"get": {
+      "get": {
         "security": [
           {
             "bearerAuth": []
           }
         ],
-				"tags": [
-					"Employee"
-				],
-				"summary": "Get an employee for your cpf directly from the database",
-				"produces": [
-					"application/json"
-				],
+        "tags": ["Employee"],
+        "summary": "Get an employee for your cpf directly from the database",
+        "produces": ["application/json"],
         "parameters": [
           {
             "name": "cpf",
@@ -692,39 +814,35 @@
             "type": "string"
           }
         ],
-				"responses": {
-					"200": {
-						"description": "Ok",
+        "responses": {
+          "200": {
+            "description": "Ok",
             "schema": {
-							"$ref": "#/definitions/Employee"
-						}
-					},
+              "$ref": "#/definitions/Employee"
+            }
+          },
           "401": {
-						"description": "Unauthorized"
-					},
+            "description": "Unauthorized"
+          },
           "404": {
-						"description": "Not found"
-					},
+            "description": "Not found"
+          },
           "500": {
             "description": "Internal Server Error"
           }
-				}
-			}
-		},
+        }
+      }
+    },
     "/employee/company/{cnpj}": {
-			"get": {
+      "get": {
         "security": [
           {
             "bearerAuth": []
           }
         ],
-				"tags": [
-					"Employee"
-				],
-				"summary": "Get a list of all employees for your company cnpj directly in the database",
-				"produces": [
-					"application/json"
-				],
+        "tags": ["Employee"],
+        "summary": "Get a list of all employees for your company cnpj directly in the database",
+        "produces": ["application/json"],
         "parameters": [
           {
             "name": "cnpj",
@@ -734,126 +852,114 @@
             "type": "string"
           }
         ],
-				"responses": {
-					"200": {
-						"description": "Ok",
+        "responses": {
+          "200": {
+            "description": "Ok",
             "schema": {
               "type": "array",
               "items": {
                 "type": "object",
                 "$ref": "#/definitions/Employee"
               }
-						}
-					},
+            }
+          },
           "401": {
-						"description": "Unauthorized"
-					},
+            "description": "Unauthorized"
+          },
           "404": {
-						"description": "Not found"
-					},
+            "description": "Not found"
+          },
           "500": {
             "description": "Internal Server Error"
           }
-				}
-			}
-		},
+        }
+      }
+    },
     "/employee": {
-			"post": {
+      "post": {
         "security": [
           {
             "bearerAuth": []
           }
         ],
-				"tags": [
-					"Employee"
-				],
-				"summary": "Insert a new employee in the database",
-				"consumes": [
-					"application/json"
-				],
-				"produces": [
-					"application/json"
-				],
-				"parameters": [
+        "tags": ["Employee"],
+        "summary": "Insert a new employee in the database",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [
           {
-						"name": "employee",
-						"in": "body",
-						"required": true,
-						"description": "Employee entity in the db",
-						"schema": {
-							"type": "object",
-							"properties": {
-								"cpf": {
-									"type": "string"
-								},
-								"name": {
-									"type": "string"
-								},
-								"email": {
-									"type": "string"
-								},
-								"dtBirth": {
-									"type": "date-time",
-									"example": "2001-12-11T22:30:00Z"
-								},
-								"entry": {
-									"type": "string",
-									"example": "08:00"
-								},
-								"exit": {
-									"type": "string",
-									"example": "18:00"
-								},
-								"workingTime": {
-									"type": "integer"
-								},
-								"role": {
-									"type": "string"
-								},
-								"companyCpf": {
-									"type": "string"
-								}
-							}
-						}
-					}
-				],
-				"responses": {
-					"201": {
-						"description": "Created",
-						"schema": {
-							"$ref": "#/definitions/Employee"
-						}
-					},
+            "name": "employee",
+            "in": "body",
+            "required": true,
+            "description": "Employee entity in the db",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "cpf": {
+                  "type": "string"
+                },
+                "name": {
+                  "type": "string"
+                },
+                "email": {
+                  "type": "string"
+                },
+                "dtBirth": {
+                  "type": "date-time",
+                  "example": "2001-12-11T22:30:00Z"
+                },
+                "entry": {
+                  "type": "string",
+                  "example": "08:00"
+                },
+                "exit": {
+                  "type": "string",
+                  "example": "18:00"
+                },
+                "workingTime": {
+                  "type": "integer"
+                },
+                "role": {
+                  "type": "string"
+                },
+                "companyCpf": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/Employee"
+            }
+          },
           "401": {
-						"description": "Unauthorized"
-					},
+            "description": "Unauthorized"
+          },
           "409": {
-						"description": "Already exists"
-					},
-					"500": {
-						"description": "Internal Server Error"
-					}
-				}
-			}
-		},
+            "description": "Already exists"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
     "/employee/{cpf}/": {
-			"put": {
+      "put": {
         "security": [
           {
             "bearerAuth": []
           }
         ],
-				"tags": [
-					"Employee"
-				],
-				"summary": "Update a employee in the database",
-				"consumes": [
-					"application/json"
-				],
-				"produces": [
-					"application/json"
-				],
-				"parameters": [
+        "tags": ["Employee"],
+        "summary": "Update a employee in the database",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [
           {
             "name": "cpf",
             "in": "path",
@@ -862,117 +968,109 @@
             "type": "string"
           },
           {
-						"name": "employee",
-						"in": "body",
-						"required": true,
-						"description": "Employee entity in the db",
-						"schema": {
-							"type": "object",
-							"properties": {
-								"name": {
-									"type": "string"
-								},
-								"email": {
-									"type": "string"
-								},
-								"password": {
-									"type": "string"
-								},
-								"dtBirth": {
-									"type": "date-time",
-									"example": "2001-12-11T22:30:00Z"
-								},
-								"entry": {
-									"type": "string",
-									"example": "08:00"
-								},
-								"exit": {
-									"type": "string",
-									"example": "18:00"
-								},
-								"workingTime": {
-									"type": "integer"
-								},
-								"role": {
-									"type": "string"
-								},
-								"companyCpf": {
-									"type": "string"
-								}
-							}
-						}
-					}
-				],
-				"responses": {
-					"200": {
-						"description": "OK",
-						"schema": {
-							"$ref": "#/definitions/Employee"
-						}
-					},
+            "name": "employee",
+            "in": "body",
+            "required": true,
+            "description": "Employee entity in the db",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string"
+                },
+                "email": {
+                  "type": "string"
+                },
+                "password": {
+                  "type": "string"
+                },
+                "dtBirth": {
+                  "type": "date-time",
+                  "example": "2001-12-11T22:30:00Z"
+                },
+                "entry": {
+                  "type": "string",
+                  "example": "08:00"
+                },
+                "exit": {
+                  "type": "string",
+                  "example": "18:00"
+                },
+                "workingTime": {
+                  "type": "integer"
+                },
+                "role": {
+                  "type": "string"
+                },
+                "companyCpf": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Employee"
+            }
+          },
           "401": {
-						"description": "Unauthorized"
-					},
+            "description": "Unauthorized"
+          },
           "404": {
-						"description": "Not found"
-					},
+            "description": "Not found"
+          },
           "500": {
-						"description": "Internal Server Error"
-					}
-				}
-			}
-		},
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
     "/absence/": {
-			"get": {
+      "get": {
         "security": [
           {
             "bearerAuth": []
           }
         ],
-				"tags": [
-					"Absence"
-				],
-				"summary": "Get a list of all employee absences directly in the database",
-				"produces": [
-					"application/json"
-				],
-				"responses": {
-					"200": {
-						"description": "Ok",
+        "tags": ["Absence"],
+        "summary": "Get a list of all employee absences directly in the database",
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "Ok",
             "schema": {
               "type": "array",
               "items": {
                 "type": "object",
                 "$ref": "#/definitions/Absence"
               }
-						}
-					},
+            }
+          },
           "401": {
-						"description": "Unauthorized"
-					},
+            "description": "Unauthorized"
+          },
           "404": {
-						"description": "Not found"
-					},
+            "description": "Not found"
+          },
           "500": {
             "description": "Internal Server Error"
           }
-				}
-			}
-		},
+        }
+      }
+    },
     "/absence/{id}": {
-			"get": {
+      "get": {
         "security": [
           {
             "bearerAuth": []
           }
         ],
-				"tags": [
-					"Absence"
-				],
-				"summary": "Get an absence for your indentify number directly from the database",
-				"produces": [
-					"application/json"
-				],
+        "tags": ["Absence"],
+        "summary": "Get an absence for your indentify number directly from the database",
+        "produces": ["application/json"],
         "parameters": [
           {
             "name": "id",
@@ -982,39 +1080,35 @@
             "type": "integer"
           }
         ],
-				"responses": {
-					"200": {
-						"description": "Ok",
+        "responses": {
+          "200": {
+            "description": "Ok",
             "schema": {
-							"$ref": "#/definitions/Absence"
-						}
-					},
+              "$ref": "#/definitions/Absence"
+            }
+          },
           "401": {
-						"description": "Unauthorized"
-					},
+            "description": "Unauthorized"
+          },
           "404": {
-						"description": "Not found"
-					},
+            "description": "Not found"
+          },
           "500": {
             "description": "Internal Server Error"
           }
-				}
-			}
-		},
+        }
+      }
+    },
     "/absence/status/{status}": {
-			"get": {
+      "get": {
         "security": [
           {
             "bearerAuth": []
           }
         ],
-				"tags": [
-					"Absence"
-				],
-				"summary": "Get a list of all absences for your status directly from the database",
-				"produces": [
-					"application/json"
-				],
+        "tags": ["Absence"],
+        "summary": "Get a list of all absences for your status directly from the database",
+        "produces": ["application/json"],
         "parameters": [
           {
             "name": "status",
@@ -1024,55 +1118,49 @@
             "type": "string"
           }
         ],
-				"responses": {
-					"200": {
-						"description": "Ok",
+        "responses": {
+          "200": {
+            "description": "Ok",
             "schema": {
               "type": "array",
               "items": {
                 "type": "object",
                 "$ref": "#/definitions/Absence"
               }
-						}
-					},
+            }
+          },
           "401": {
-						"description": "Unauthorized"
-					},
+            "description": "Unauthorized"
+          },
           "404": {
-						"description": "Not found"
-					},
+            "description": "Not found"
+          },
           "500": {
             "description": "Internal Server Error"
           }
-				}
-			}
-		},
+        }
+      }
+    },
     "/absence": {
-			"post": {
+      "post": {
         "security": [
           {
             "bearerAuth": []
           }
         ],
-				"tags": [
-					"Absence"
-				],
-				"summary": "Insert the absence of the employee in the database",
-				"consumes": [
-					"application/json"
-				],
-				"produces": [
-					"application/json"
-				],
-				"parameters": [
+        "tags": ["Absence"],
+        "summary": "Insert the absence of the employee in the database",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [
           {
-						"name": "absence",
-						"in": "body",
-						"required": true,
-						"description": "Absence entity in the db",
-						"schema": {
-							"type": "object",
-							"properties": {
+            "name": "absence",
+            "in": "body",
+            "required": true,
+            "description": "Absence entity in the db",
+            "schema": {
+              "type": "object",
+              "properties": {
                 "type": {
                   "type": "string"
                 },
@@ -1091,46 +1179,40 @@
                   "type": "string"
                 }
               }
-						}
-					}
-				],
-				"responses": {
-					"201": {
-						"description": "Created",
-						"schema": {
-							"$ref": "#/definitions/Absence"
-						}
-					},
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/Absence"
+            }
+          },
           "401": {
-						"description": "Unauthorized"
-					},
+            "description": "Unauthorized"
+          },
           "409": {
-						"description": "Already exists"
-					},
-					"500": {
-						"description": "Internal Server Error"
-					}
-				}
-			}
-		},
+            "description": "Already exists"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
     "/absence/{id}/": {
-			"put": {
+      "put": {
         "security": [
           {
             "bearerAuth": []
           }
         ],
-				"tags": [
-					"Absence"
-				],
-				"summary": "Update the employee's absence in the database",
-				"consumes": [
-					"application/json"
-				],
-				"produces": [
-					"application/json"
-				],
-				"parameters": [
+        "tags": ["Absence"],
+        "summary": "Update the employee's absence in the database",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [
           {
             "name": "id",
             "in": "path",
@@ -1139,13 +1221,13 @@
             "type": "number"
           },
           {
-						"name": "absence",
-						"in": "body",
-						"required": true,
-						"description": "Absence entity in the db",
-						"schema": {
-							"type": "object",
-							"properties": {
+            "name": "absence",
+            "in": "body",
+            "required": true,
+            "description": "Absence entity in the db",
+            "schema": {
+              "type": "object",
+              "properties": {
                 "type": {
                   "type": "string"
                 },
@@ -1164,42 +1246,38 @@
                   "type": "string"
                 }
               }
-						}
-					}
-				],
-				"responses": {
-					"200": {
-						"description": "OK",
-						"schema": {
-							"$ref": "#/definitions/Absence"
-						}
-					},
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Absence"
+            }
+          },
           "401": {
-						"description": "Unauthorized"
-					},
+            "description": "Unauthorized"
+          },
           "404": {
-						"description": "Not found"
-					},
+            "description": "Not found"
+          },
           "500": {
-						"description": "Internal Server Error"
-					}
-				}
-			}
-		},
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
     "/absence/{ id }/": {
-			"delete": {
+      "delete": {
         "security": [
           {
             "bearerAuth": []
           }
         ],
-				"tags": [
-					"Absence"
-				],
-				"summary": "Delete an absence for your indentify number directly from the database",
-				"produces": [
-					"application/json"
-				],
+        "tags": ["Absence"],
+        "summary": "Delete an absence for your indentify number directly from the database",
+        "produces": ["application/json"],
         "parameters": [
           {
             "name": "id",
@@ -1209,22 +1287,22 @@
             "type": "integer"
           }
         ],
-				"responses": {
-					"200": {
-						"description": "Ok"
-					},
+        "responses": {
+          "200": {
+            "description": "Ok"
+          },
           "401": {
-						"description": "Unauthorized"
-					},
+            "description": "Unauthorized"
+          },
           "404": {
-						"description": "Not found"
-					},
+            "description": "Not found"
+          },
           "500": {
             "description": "Internal Server Error"
           }
-				}
-			}
-		},
+        }
+      }
+    },
     "/point/{createdAt}": {
       "get": {
         "security": [
@@ -1232,13 +1310,9 @@
             "bearerAuth": []
           }
         ],
-				"tags": [
-					"Point"
-				],
-				"summary": "Get a list of all points for your created date directly from the database",
-				"produces": [
-					"application/json"
-				],
+        "tags": ["Point"],
+        "summary": "Get a list of all points for your created date directly from the database",
+        "produces": ["application/json"],
         "parameters": [
           {
             "name": "createdAt",
@@ -1248,28 +1322,28 @@
             "type": "string"
           }
         ],
-				"responses": {
-					"200": {
-						"description": "Ok",
+        "responses": {
+          "200": {
+            "description": "Ok",
             "schema": {
               "type": "array",
               "items": {
                 "type": "object",
                 "$ref": "#/definitions/Point"
               }
-						}
-					},
+            }
+          },
           "401": {
-						"description": "Unauthorized"
-					},
+            "description": "Unauthorized"
+          },
           "404": {
-						"description": "Not found"
-					},
+            "description": "Not found"
+          },
           "500": {
             "description": "Internal Server Error"
           }
-				}
-			}
+        }
+      }
     },
     "/point/employee/{cpf}": {
       "get": {
@@ -1278,13 +1352,9 @@
             "bearerAuth": []
           }
         ],
-				"tags": [
-					"Point"
-				],
-				"summary": "Get a list of all points for employee document identify directly from the database",
-				"produces": [
-					"application/json"
-				],
+        "tags": ["Point"],
+        "summary": "Get a list of all points for employee document identify directly from the database",
+        "produces": ["application/json"],
         "parameters": [
           {
             "name": "cpf",
@@ -1294,104 +1364,98 @@
             "type": "string"
           }
         ],
-				"responses": {
-					"200": {
-						"description": "Ok",
+        "responses": {
+          "200": {
+            "description": "Ok",
             "schema": {
               "type": "array",
               "items": {
                 "type": "object",
                 "$ref": "#/definitions/Point"
               }
-						}
-					},
+            }
+          },
           "401": {
-						"description": "Unauthorized"
-					},
+            "description": "Unauthorized"
+          },
           "404": {
-						"description": "Not found"
-					},
+            "description": "Not found"
+          },
           "500": {
             "description": "Internal Server Error"
           }
-				}
-			}
+        }
+      }
     },
     "/point": {
-			"post": {
+      "post": {
         "security": [
           {
             "bearerAuth": []
           }
         ],
-				"tags": [
-					"Point"
-				],
-				"summary": "Insert an employee's point into the database",
-				"consumes": [
-					"application/json"
-				],
-				"produces": [
-					"application/json"
-				],
-				"parameters": [
+        "tags": ["Point"],
+        "summary": "Insert an employee's point into the database",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [
           {
-						"name": "point",
-						"in": "body",
-						"required": true,
-						"description": "Point entity in the db",
-						"schema": {
-							"type": "object",
-							"properties": {
+            "name": "point",
+            "in": "body",
+            "required": true,
+            "description": "Point entity in the db",
+            "schema": {
+              "type": "object",
+              "properties": {
                 "employeeCpf": {
                   "type": "string"
                 }
               }
-						}
-					}
-				],
-				"responses": {
-					"201": {
-						"description": "Created",
-						"schema": {
-							"$ref": "#/definitions/Point"
-						}
-					},
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/Point"
+            }
+          },
           "401": {
-						"description": "Unauthorized"
-					},
-					"500": {
-						"description": "Internal Server Error"
-					}
-				}
-			}
-		}
-	},
-	"definitions": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
     "User": {
-			"type": "object",
-			"properties": {
-				"id": {
-					"type": "string"
-				},
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
         "name": {
-					"type": "string"
-				},
-				"email": {
-					"type": "string"
-				},
-				"password": {
-					"type": "string"
-				},
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        },
         "role": {
-					"type": "string"
-				},
+          "type": "string"
+        },
         "firstAccess": {
-					"type": "boolean"
-				},
+          "type": "boolean"
+        },
         "companyCnpj": {
-					"type": "string"
-				},
+          "type": "string"
+        },
         "createdAt": {
           "type": "date-time",
           "example": "2021-01-30T08:30:00Z"
@@ -1400,44 +1464,44 @@
           "type": "date-time",
           "example": "2021-01-30T08:30:00Z"
         }
-			}
-		},
+      }
+    },
     "Employee": {
-			"type": "object",
-			"properties": {
-				"cpf": {
-					"type": "string"
-				},
+      "type": "object",
+      "properties": {
+        "cpf": {
+          "type": "string"
+        },
         "name": {
-					"type": "string"
-				},
-				"email": {
-					"type": "string"
-				},
-				"password": {
-					"type": "string"
-				},
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        },
         "dtBirth": {
-					"type": "date-time",
+          "type": "date-time",
           "example": "2001-12-11T22:30:00Z"
-				},
-				"entry": {
-					"type": "string",
+        },
+        "entry": {
+          "type": "string",
           "example": "08:00"
-				},
+        },
         "exit": {
-					"type": "date-time",
+          "type": "date-time",
           "example": "18:00"
-				},
+        },
         "workingTime": {
-					"type": "integer"
-				},
+          "type": "integer"
+        },
         "role": {
-					"type": "string"
-				},
+          "type": "string"
+        },
         "companyCpf": {
-					"type": "string"
-				},
+          "type": "string"
+        },
         "createdAt": {
           "type": "date-time",
           "example": "2021-01-30T08:30:00Z"
@@ -1448,47 +1512,47 @@
         },
         "company": {
           "type": "object",
-					"$ref": "#/definitions/Company"
+          "$ref": "#/definitions/Company"
         },
         "address": {
           "type": "object",
-					"$ref": "#/definitions/Address"
+          "$ref": "#/definitions/Address"
         },
         "points": {
           "type": "array",
           "items": {
-						"$ref": "#/definitions/Point"
+            "$ref": "#/definitions/Point"
           }
         },
         "absences": {
           "type": "array",
           "items": {
-						"$ref": "#/definitions/Absence"
+            "$ref": "#/definitions/Absence"
           }
         }
-			}
-		},
+      }
+    },
     "Address": {
-			"type": "object",
-			"properties": {
-				"id": {
-					"type": "integer"
-				},
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer"
+        },
         "street": {
-					"type": "string"
-				},
-				"district": {
-					"type": "string"
-				},
-				"city": {
-					"type": "string"
-				},
+          "type": "string"
+        },
+        "district": {
+          "type": "string"
+        },
+        "city": {
+          "type": "string"
+        },
         "employeeCpf": {
-					"type": "string"
-				},
+          "type": "string"
+        },
         "state": {
-					"type": "string"
-				},
+          "type": "string"
+        },
         "createdAt": {
           "type": "date-time",
           "example": "2021-01-30T08:30:00Z"
@@ -1499,19 +1563,19 @@
         },
         "employee": {
           "type": "object",
-					"$ref": "#/definitions/Employee"
+          "$ref": "#/definitions/Employee"
         }
-			}
-		},
+      }
+    },
     "Company": {
-			"type": "object",
-			"properties": {
-				"cnpj": {
-					"type": "string"
-				},
-				"name": {
-					"type": "string"
-				},
+      "type": "object",
+      "properties": {
+        "cnpj": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
         "createdAt": {
           "type": "date-time",
           "example": "2021-01-30T08:30:00Z"
@@ -1523,38 +1587,38 @@
         "employees": {
           "type": "array",
           "items": {
-						"$ref": "#/definitions/Employee"
+            "$ref": "#/definitions/Employee"
           }
         }
-			}
-		},
+      }
+    },
     "Absence": {
-			"type": "object",
-			"properties": {
-				"id": {
-					"type": "integer"
-				},
-				"type": {
-					"type": "integer",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer"
+        },
+        "type": {
+          "type": "integer",
           "example": "0=Negado; 1=AguardandoAnálise; 2=Aprovado"
-				},
-				"description": {
-					"type": "string"
-				},
-				"startTime": {
-					"type": "date-time",
+        },
+        "description": {
+          "type": "string"
+        },
+        "startTime": {
+          "type": "date-time",
           "example": "2021-01-30T15:00:00Z"
-				},
-				"endTime": {
-					"type": "date-time",
+        },
+        "endTime": {
+          "type": "date-time",
           "example": "2021-01-30T15:00:00Z"
-				},
+        },
         "justification": {
-					"type": "string"
-				},
+          "type": "string"
+        },
         "employeeCpf": {
-					"type": "string"
-				},
+          "type": "string"
+        },
         "createdAt": {
           "type": "date-time",
           "example": "2021-01-30T08:30:00Z"
@@ -1565,19 +1629,19 @@
         },
         "employee": {
           "type": "object",
-					"$ref": "#/definitions/Employee"
+          "$ref": "#/definitions/Employee"
         }
-			}
-		},
+      }
+    },
     "Point": {
-			"type": "object",
-			"properties": {
-				"id": {
-					"type": "integer"
-				},
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer"
+        },
         "employeeCpf": {
-					"type": "string"
-				},
+          "type": "string"
+        },
         "createdAt": {
           "type": "date-time",
           "example": "2021-01-30T08:30:00Z"
@@ -1588,9 +1652,9 @@
         },
         "employee": {
           "type": "object",
-					"$ref": "#/definitions/Employee"
+          "$ref": "#/definitions/Employee"
         }
-			}
-		}
-	}
+      }
+    }
+  }
 }

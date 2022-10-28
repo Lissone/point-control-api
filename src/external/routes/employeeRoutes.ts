@@ -13,7 +13,6 @@ const employeeRepository = new EmployeeRepository()
 const userRepository = new UserRepository()
 const employeeController = new EmployeeController(employeeRepository, userRepository)
 
-
 employeeRoutes.get('/', AuthMiddleware, (req, res) => employeeController.getAll(req, res))
 employeeRoutes.get('/company/:cnpj', AuthMiddleware, (req, res) => employeeController.findByCompanyCnpj(req, res))
 employeeRoutes.get('/:cpf', AuthMiddleware, (req, res) => employeeController.getOne(req, res))
