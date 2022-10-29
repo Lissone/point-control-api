@@ -10,7 +10,7 @@
     "prepare": "husky install",
     "commit": "git-cz",
     "build": "tsc --project tsconfig.json && tscpaths -p tsconfig.json -s ./src -o ./dist",
-    "start": "node -r ts-node/register/transpile-only -r tsconfig-paths/register dist/server.js",
+    "start": "node -r ts-node/register/transpile-only -r tsconfig-paths/register dist/external/server.js",
     "dev": "ts-node-dev -r tsconfig-paths/register --respawn --transpile-only --ignore-watch node_modules ."
   },
   "dependencies": {
@@ -57,6 +57,7 @@
     "ts-node": "^10.9.1",
     "ts-node-dev": "^2.0.0",
     "tsconfig-paths": "^3.9.0",
+    "tscpaths": "^0.0.9",
     "typescript": "*"
   },
   "husky": {
