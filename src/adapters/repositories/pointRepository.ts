@@ -18,7 +18,7 @@ export class PointRepository implements IPointRepository {
         createdAt: Between(createdAt, addDays(createdAt, 1))
       },
       order: { createdAt: 'DESC' },
-      relations: ['employee']
+      relations: ['employee', 'employee.company']
     })
   }
 
@@ -29,7 +29,7 @@ export class PointRepository implements IPointRepository {
         employee: { companyCnpj }
       },
       order: { createdAt: 'DESC' },
-      relations: ['employee']
+      relations: ['employee', 'employee.company']
     })
   }
 
@@ -37,12 +37,12 @@ export class PointRepository implements IPointRepository {
     return this.repository.find({
       where: { employeeCpf },
       order: { createdAt: 'DESC' },
-      relations: ['employee']
+      relations: ['employee', 'employee.company']
     })
   }
 
   async getOne(id: number): Promise<IPoint | undefined> {
-    return this.repository.findOne(id, { relations: ['employee'] })
+    return this.repository.findOne(id, { relations: ['employee', 'employee.company'] })
   }
 
   async create(dto: IPoint): Promise<IPoint> {
