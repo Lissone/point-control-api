@@ -7,11 +7,11 @@ export enum AbsenceStatus {
 }
 
 export interface IAbsenceRepository {
-  getAll() : Promise<IAbsence[]>
-  findByCompanyCnpj(companyCnpj: string) : Promise<IAbsence[]>
-  findByStatus(status: number) : Promise<IAbsence[]>
-  getOne(id: number) : Promise<IAbsence | undefined>
-  create(absence: IAbsence) : Promise<IAbsence>
-  update(absence: IAbsence) : Promise<IAbsence>
-  delete(id: number) : Promise<void>
+  getAll(): Promise<IAbsence[]>
+  findByCompanyCnpj(companyCnpj: string): Promise<IAbsence[]>
+  findByStatus(status: number): Promise<IAbsence[]>
+  getOne(id: number): Promise<IAbsence | undefined>
+  create(absence: IAbsence): Promise<IAbsence>
+  update(absence: IAbsence): Promise<IAbsence>
+  delete(id: number): Promise<void>
 }

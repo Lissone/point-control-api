@@ -1,9 +1,10 @@
+/* eslint-disable no-console */
 import 'reflect-metadata'
-import 'src/external/envConfig'
-
-import { app } from './app'
+import '@external/envConfig'
 
 import { connection } from '@external/database/dbConfig'
+
+import { app } from './app'
 
 const port = process.env.PORT || 5000
 

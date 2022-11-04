@@ -3,6 +3,7 @@ import { Router } from 'express'
 import { AuthMiddleware } from '@middlewares/authMiddleware'
 
 import { CompanyRepository } from '@repositories/companyRepository'
+
 import { CompanyController } from '@controllers/companyController'
 
 export const companyRoutes = Router()

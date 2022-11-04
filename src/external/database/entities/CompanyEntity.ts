@@ -1,6 +1,6 @@
-import { ICompany } from '@entities/ICompany'
-
 import { EntitySchema } from 'typeorm'
+
+import { ICompany } from '@entities/ICompany'
 
 export const CompanyEntity = new EntitySchema<ICompany>({
   name: 'company',
@@ -21,7 +21,7 @@ export const CompanyEntity = new EntitySchema<ICompany>({
     updatedAt: {
       name: 'updated_at',
       type: 'datetime2',
-      updateDate: true,
+      updateDate: true
     }
   },
   relations: {

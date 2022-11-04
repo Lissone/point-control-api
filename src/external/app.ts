@@ -1,9 +1,11 @@
-import express from 'express'
 import cors from 'cors'
+import express from 'express'
 import swaggerUi from 'swagger-ui-express'
 
+import { apiRoutes } from '@external/routes'
+
+// eslint-disable-next-line import/extensions
 import * as swaggerDocument from '../swagger.json'
-import { apiRoutes } from 'src/external/routes'
 
 const app = express()
 
