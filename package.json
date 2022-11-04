@@ -1,8 +1,8 @@
 {
   "name": "point-control-api",
-  "version": "1.1.1",
+  "version": "1.2.1",
   "main": "src/external/server.ts",
-  "description": "Api de uma aplicação de controle de pontos de empresas.",
+  "description": "Api of a company points control application.",
   "repository": "https://github.com/Lissone/point-control-api.git",
   "author": "Leonardo Dias Lissone Santomero",
   "license": "MIT",
