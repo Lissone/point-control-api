@@ -35,7 +35,7 @@ This project is the Back-end (Api) of a company point control application. To il
 
 Project developed as an activity of my bachelor's degree in information systems, with the main objective of having a very descriptive and extensive documentation, for anyone to understand the features and learn from it. The api framework was built on clean architecture and documented with Swagger.
 
-To facilitate the development of the project and better describe everything that was created, a flowchart of some of the project's features and relevant information at the time of its development was designed, using Whimsical.
+To facilitate the development of the project and better describe everything that was created, a flowchart of some of the project's features and relevant information at the time of its development was designed, using <a href="https://whimsical.com/pointcontrol-5dryUV3teiRwy1rPzH3ekK" target="_blank">Whimsical</a>.
 
 To access the other projects integrated to this one, access:
 - <a href="https://github.com/Lissone/point-control-admin-web" target="_blank">Front-end to admin users</a>
