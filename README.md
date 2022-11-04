@@ -46,7 +46,6 @@ This project was done in partnership with:
 - <a href="https://github.com/steniodr" target="_blank">Stenio Rapchan</a>
 - <a href="https://github.com/almeidavini" target="_blank">Vinicius Almeida</a>
 
-
 ## Demonstrations
 
 Front-end to admin users
@@ -55,7 +54,7 @@ https://user-images.githubusercontent.com/57052110/194934760-04bbc99d-4cce-464e-
 
 Front-end to employees
 
-https://user-images.githubusercontent.com/57052110/194934760-04bbc99d-4cce-464e-a93d-7f47beb80742.mp4
+https://user-images.githubusercontent.com/57052110/200085812-502e5746-05b4-4497-82eb-796c923ff65b.mp4
 
 ## Requirements
 
