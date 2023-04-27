@@ -1,11 +1,5 @@
+import path from 'path'
 import { createConnection } from 'typeorm'
-
-import { AbsenceEntity } from './entities/AbsenceEntity'
-import { AddressEntity } from './entities/AddressEntity'
-import { CompanyEntity } from './entities/CompanyEntity'
-import { EmployeeEntity } from './entities/EmployeeEntity'
-import { PointEntity } from './entities/PointEntity'
-import { UserEntity } from './entities/UserEntity'
 
 const connection = createConnection({
   type: 'mssql',
@@ -14,7 +8,7 @@ const connection = createConnection({
   username: process.env.DB_USERNAME,
   password: process.env.DB_PASSWORD,
   database: process.env.DB_NAME,
-  entities: [UserEntity, CompanyEntity, EmployeeEntity, AddressEntity, AbsenceEntity, PointEntity],
+  entities: [path.join(__dirname, 'entities/*{.ts,.js}')],
   synchronize: true,
   logging: false,
   options: {

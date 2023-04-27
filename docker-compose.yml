@@ -1,0 +1,30 @@
+version: '3'
+
+services:
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    ports:
+      - '1433:1433'
+    environment:
+      MSSQL_SA_PASSWORD: Dev1234!
+      ACCEPT_EULA: Y
+      MSSQL_PID: Developer
+
+  redis:
+    image: 'redis:alpine'
+    ports:
+      - '6379:6379'
+
+  api:
+    container_name: point-control-api
+    image: point-control-api:1.0
+    build:
+      context: .
+      args:
+        APP_PORT: 5000
+    restart: always
+    ports:
+      - 5000:5000
+    depends_on:
+      - redis
+      - sqlserver
