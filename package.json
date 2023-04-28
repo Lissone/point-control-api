@@ -1,6 +1,6 @@
 {
   "name": "point-control-api",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "main": "src/external/server.ts",
   "description": "Api of a company points control application.",
   "repository": "https://github.com/Lissone/point-control-api.git",
