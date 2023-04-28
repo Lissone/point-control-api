@@ -38,10 +38,12 @@ Project developed as an activity of my bachelor's degree in information systems,
 To facilitate the development of the project and better describe everything that was created, a flowchart of some of the project's features and relevant information at the time of its development was designed, using <a href="https://whimsical.com/pointcontrol-5dryUV3teiRwy1rPzH3ekK" target="_blank">Whimsical</a>.
 
 To access the other projects integrated to this one, access:
+
 - <a href="https://github.com/Lissone/point-control-admin-web" target="_blank">Front-end to admin users</a>
 - <a href="https://github.com/almeidavini/point-control" target="_blank">Front-end to employees</a>
 
 This project was done in partnership with:
+
 - <a href="https://github.com/MikaMorais" target="_blank">Moises Morais</a>
 - <a href="https://github.com/steniodr" target="_blank">Stenio Rapchan</a>
 - <a href="https://github.com/almeidavini" target="_blank">Vinicius Almeida</a>
@@ -88,13 +90,6 @@ git clone https://github.com/Lissone/pointControl-api.git
 cd pointControl-api
 ```
 
-Install dependencies using:
-```bash
-yarn
-#or
-npm install
-```
-
 ### Initial settings before running project
 
 Because we use external services, it is necessary to make some simple configurations before running the project.
@@ -130,13 +125,13 @@ Default password: 123456
 INSERT INTO [dbo].[user]
 (id, name, email, password, role, first_access, company_cnpj, created_at, updated_at)
 VALUES (
-  '08e5ad8d-5fa3-41a2-a732-b997336b4cf5', 
+  '08e5ad8d-5fa3-41a2-a732-b997336b4cf5',
   'Global Admin',
-  'admin@admin.com', 
-  '$2a$05$MG6XoOEDPjtXVesTW8P2S.UkNzii1ai7VEAvBnToDHZq03sSij2vi', 
+  'admin@admin.com',
+  '$2a$05$MG6XoOEDPjtXVesTW8P2S.UkNzii1ai7VEAvBnToDHZq03sSij2vi',
   'global.admin',
   1,
-  NULL, 
+  NULL,
   '2001-12-11T22:30:00Z',
   '2001-12-11T22:30:00Z'
 )
@@ -152,8 +147,13 @@ Need to add environment variables:
 # .\.env
 
 # DEFAULT
-PORT=5000
-SECRET_KEY=super_secret # JWT secret key
+# APP
+APP_PORT=5000
+APP_NAME=point-control-api
+APP_VERSION=0.0.0
+
+# AUTH
+SECRET_KEY=super_scret # JWT secret key
 
 # REDIS
 REDIS_HOST=localhost
@@ -166,8 +166,25 @@ DB_NAME=dbPointControl
 DB_HOST=localhost
 
 # NODEMAILER
-NODEMAILER_USER= # Email used for sending messages 
+NODEMAILER_USER= # Email used for sending messages
 NODEMAILER_PASS= # Your email password
+```
+
+If you have <b>Docker</b>, and want to run the container, use the command:
+
+```bash
+# Build the project container
+docker-compose build
+# Up container
+docker-compose up
+```
+
+Install dependencies using:
+
+```bash
+yarn
+#or
+npm install
 ```
 
 Run api:
@@ -216,4 +233,3 @@ Thanks goes to these wonderful people, who were part of the project from start t
 Distributed under the MIT License. See `LICENSE` for more information.
 
 <hr />
-
