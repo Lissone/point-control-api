@@ -147,8 +147,13 @@ Need to add environment variables:
 # .\.env
 
 # DEFAULT
-PORT=5000
-SECRET_KEY=super_secret # JWT secret key
+# APP
+APP_PORT=5000
+APP_NAME=point-control-api
+APP_VERSION=0.0.0
+
+# AUTH
+SECRET_KEY=super_scret # JWT secret key
 
 # REDIS
 REDIS_HOST=localhost

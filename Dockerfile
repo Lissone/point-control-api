@@ -14,9 +14,9 @@ COPY . .
 
 RUN npm run --silent build
 
-ARG PORT=5000
-ENV PORT $PORT
-EXPOSE $PORT
+ARG APP_PORT=5000
+ENV APP_PORT $APP_PORT
+EXPOSE $APP_PORT
 
 CMD npm run --silent start
 

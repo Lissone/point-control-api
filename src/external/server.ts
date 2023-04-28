@@ -6,7 +6,7 @@ import { connection } from '@external/database/dbConfig'
 
 import { app } from './app'
 
-const port = process.env.PORT || 5000
+const port = process.env.APP_PORT || 5000
 
 connection
   .then(() => {
