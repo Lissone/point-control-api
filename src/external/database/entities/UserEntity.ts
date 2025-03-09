@@ -16,7 +16,7 @@ export const UserEntity = new EntitySchema<IUser>({
     email: {
       type: String,
       nullable: false,
-      unique: true
+      unique: true // Garante que o email seja único
     },
     password: {
       type: String,
@@ -38,13 +38,13 @@ export const UserEntity = new EntitySchema<IUser>({
     },
     createdAt: {
       name: 'created_at',
-      type: 'datetime2',
-      createDate: true
+      type: 'timestamp', // Alterado para 'timestamp' para PostgreSQL
+      createDate: true // Define que é uma coluna de criação automática
     },
     updatedAt: {
       name: 'updated_at',
-      type: 'datetime2',
-      updateDate: true
+      type: 'timestamp', // Alterado para 'timestamp' para PostgreSQL
+      updateDate: true // Define que é uma coluna de atualização automática
     }
   },
   relations: {

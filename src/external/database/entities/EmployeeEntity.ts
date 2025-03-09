@@ -7,7 +7,7 @@ export const EmployeeEntity = new EntitySchema<IEmployee>({
   columns: {
     cpf: {
       type: String,
-      primary: true
+      primary: true // O CPF será a chave primária
     },
     name: {
       type: String,
@@ -16,7 +16,7 @@ export const EmployeeEntity = new EntitySchema<IEmployee>({
     email: {
       type: String,
       nullable: false,
-      unique: true
+      unique: true // Garante que o email seja único
     },
     password: {
       type: String,
@@ -24,7 +24,8 @@ export const EmployeeEntity = new EntitySchema<IEmployee>({
     },
     dtBirth: {
       name: 'birthday_date',
-      type: 'datetime2'
+      type: 'timestamp', // Alterado para 'timestamp' para PostgreSQL
+      nullable: true // Pode ser nulo caso o campo não seja obrigatório
     },
     entry: {
       type: String,
@@ -50,13 +51,13 @@ export const EmployeeEntity = new EntitySchema<IEmployee>({
     },
     createdAt: {
       name: 'created_at',
-      type: 'datetime2',
-      createDate: true
+      type: 'timestamp', // Alterado para 'timestamp' para PostgreSQL
+      createDate: true // Define que é uma coluna de criação automática
     },
     updatedAt: {
       name: 'updated_at',
-      type: 'datetime2',
-      updateDate: true
+      type: 'timestamp', // Alterado para 'timestamp' para PostgreSQL
+      updateDate: true // Define que é uma coluna de atualização automática
     }
   },
   relations: {

@@ -1,16 +1,19 @@
 version: '3'
 
 services:
-  sqlserver:
-    image: mcr.microsoft.com/mssql/server:2022-latest
+  postgresql:
+    image: 'bitnami/postgresql'
     ports:
-      - '1433:1433'
+      - '5432:5432'
     environment:
-      MSSQL_SA_PASSWORD: Dev1234!
-      ACCEPT_EULA: Y
-      MSSQL_PID: Developer
+      - POSTGRESQL_USERNAME=docker
+      - POSTGRESQL_PASSWORD=docker
+      - POSTGRESQL_DATABASE=dbPointControl
+    volumes:
+      - 'postgresql_data:/bitnami/postgresql'
 
   redis:
+    container_name: redis
     image: 'redis:alpine'
     ports:
       - '6379:6379'
@@ -27,4 +30,8 @@ services:
       - 5000:5000
     depends_on:
       - redis
-      - sqlserver
+      - postgresql
+
+volumes:
+  postgresql_data:
+    driver: local

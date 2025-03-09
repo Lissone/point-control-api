@@ -8,7 +8,7 @@ export const AddressEntity = new EntitySchema<IAddress>({
     id: {
       type: Number,
       primary: true,
-      generated: true
+      generated: 'increment' // Ajustado para auto-incremento no PostgreSQL
     },
     street: {
       type: String,
@@ -33,22 +33,22 @@ export const AddressEntity = new EntitySchema<IAddress>({
     },
     createdAt: {
       name: 'created_at',
-      type: 'datetime2',
-      createDate: true
+      type: 'timestamp', // Alterado para 'timestamp' para PostgreSQL
+      createDate: true // Define que é uma coluna de criação automática
     },
     updatedAt: {
       name: 'updated_at',
-      type: 'datetime2',
-      updateDate: true
+      type: 'timestamp', // Alterado para 'timestamp' para PostgreSQL
+      updateDate: true // Define que é uma coluna de atualização automática
     }
   },
   relations: {
     employee: {
       type: 'one-to-one',
+      target: 'employee', // Refere-se à entidade 'employee' corretamente
       joinColumn: {
         name: 'employee_cpf'
       },
-      target: 'employee',
       nullable: false
     }
   }

@@ -17,13 +17,13 @@ export const PointEntity = new EntitySchema<IPoint>({
     },
     createdAt: {
       name: 'created_at',
-      type: 'datetime2',
-      createDate: true
+      type: 'timestamp', // Alterado para 'timestamp' para PostgreSQL
+      createDate: true // Define que é uma coluna de criação automática
     },
     updatedAt: {
       name: 'updated_at',
-      type: 'datetime2',
-      updateDate: true
+      type: 'timestamp', // Alterado para 'timestamp' para PostgreSQL
+      updateDate: true // Define que é uma coluna de atualização automática
     }
   },
   relations: {

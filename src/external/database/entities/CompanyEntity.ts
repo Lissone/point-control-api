@@ -7,7 +7,7 @@ export const CompanyEntity = new EntitySchema<ICompany>({
   columns: {
     cnpj: {
       type: String,
-      primary: true
+      primary: true // O CNPJ será a chave primária
     },
     name: {
       type: String,
@@ -15,20 +15,20 @@ export const CompanyEntity = new EntitySchema<ICompany>({
     },
     createdAt: {
       name: 'created_at',
-      type: 'datetime2',
-      createDate: true
+      type: 'timestamp', // Alterado para 'timestamp' para PostgreSQL
+      createDate: true // Define que é uma coluna de criação automática
     },
     updatedAt: {
       name: 'updated_at',
-      type: 'datetime2',
-      updateDate: true
+      type: 'timestamp', // Alterado para 'timestamp' para PostgreSQL
+      updateDate: true // Define que é uma coluna de atualização automática
     }
   },
   relations: {
     employees: {
       type: 'one-to-many',
-      target: 'employee',
-      inverseSide: 'company',
+      target: 'employee', // Define que o relacionamento é com a entidade 'employee'
+      inverseSide: 'company', // Relacionamento inverso em 'employee'
       nullable: true
     }
   }

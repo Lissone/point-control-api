@@ -8,7 +8,7 @@ export const AbsenceEntity = new EntitySchema<IAbsence>({
     id: {
       type: Number,
       primary: true,
-      generated: true
+      generated: 'increment' // Ajustado para auto incremento no PostgreSQL
     },
     status: {
       type: Number,
@@ -24,12 +24,12 @@ export const AbsenceEntity = new EntitySchema<IAbsence>({
     },
     startTime: {
       name: 'start_time',
-      type: 'datetime2',
+      type: 'timestamp', // Alterado para 'timestamp' para PostgreSQL
       nullable: false
     },
     endTime: {
       name: 'end_time',
-      type: 'datetime2',
+      type: 'timestamp', // Alterado para 'timestamp' para PostgreSQL
       nullable: false
     },
     employeeCpf: {
@@ -43,22 +43,22 @@ export const AbsenceEntity = new EntitySchema<IAbsence>({
     },
     createdAt: {
       name: 'created_at',
-      type: 'datetime2',
-      createDate: true
+      type: 'timestamp', // Alterado para 'timestamp' para PostgreSQL
+      createDate: true // Define que é uma coluna de criação automática
     },
     updatedAt: {
       name: 'updated_at',
-      type: 'datetime2',
-      updateDate: true
+      type: 'timestamp', // Alterado para 'timestamp' para PostgreSQL
+      updateDate: true // Define que é uma coluna de atualização automática
     }
   },
   relations: {
     employee: {
       type: 'many-to-one',
+      target: 'employee',
       joinColumn: {
         name: 'employee_cpf'
       },
-      target: 'employee',
       nullable: false
     }
   }
